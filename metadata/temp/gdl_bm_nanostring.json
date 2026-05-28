@@ -1,0 +1,143 @@
+{
+  "GdlLayer": "Business Intelligence",
+  "GdlSolutions": [
+    "eBDM"
+  ],
+  "DqChecks": [],
+  "Fields": [
+    {
+      "VariableName": "sampleid",
+      "Label": "Sample Identifier",
+      "Description": "This column gives sample identifier to uniquely identify the sample used for nanostring assay. ",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "sample identifier to uniquely identify the sample used for nanostring assay. ",
+      "Source": "Harmonized",
+      "Example": "XYZ12321201",
+      "Key": true,
+      "DataType": "string",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "param",
+      "Label": "Biomarker Name",
+      "Description": "This column param in bm_nanostring gives the name of the gene being assayed using nanostring.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "Name of the biomarker being measured",
+      "Source": "Harmonized",
+      "Example": "jak2",
+      "Key": true,
+      "DataType": "string",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_norm",
+      "Label": "Normalized Count",
+      "Description": "This column gives test result, i.e. gene expression level for a given sample ID and gene combination. It represents the normalized gene expression counts. This normalization adjusts for technical variations, ensuring accurate and comparable data across samples.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The count_norm variable represents the normalized counts of gene expression or other targets measured and normalized counts are used in subsequent analyses to draw conclusions about biological processes, treatment effects, or disease states. ",
+      "Source": "Harmonized",
+      "Example": "305",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_norm_fold",
+      "Label": "Normalized Fold Change",
+      "Description": "Fold change in normalized test result compared to baseline (C1D1 Pre).This column represents the ratio of gene expression levels between two conditions, adjusted for technical variations. This normalization ensures that the fold change accurately reflects biological differences rather than technical artifacts.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable represents the normalized fold change in expression levels of a biomarker or gene. It is typically used in molecular biology, particularly in gene expression studies, to compare the relative expression levels between different conditions, such as treatment versus control.",
+      "Source": "Harmonized",
+      "Example": "20.45",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_norm_cfb",
+      "Label": "Normalized Change From Baseline (CfB)",
+      "Description": "This field in nanostring data table represents the Change from Baseline (CfB) (C1D1 Pre)in normalized counts. The normalization corrects for any biases introduced during the calculation of changes from the baseline, ensuring that the data accurately reflects true biological differences.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable quantifies the relative change in expression levels from the baseline (initial) value, expressed as a percentage.",
+      "Source": "Harmonized",
+      "Example": "34.88",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_norm_cfbperc",
+      "Label": "Normalized Percentage  Change From Baseline (CfB)",
+      "Description": "This field in nanostring data table represents the percentage Change from Baseline (CfB) (C1D1 Pre)in normalized counts. The normalization corrects for any biases introduced during the calculation of changes from the baseline, ensuring that the data accurately reflects true biological differences. This variable is used to quantify how much the expression level of a gene or biomarker changes over time relative to its baseline (initial) level, expressed as a percentage.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable represents the normalized percentage change from baseline in the expression levels of a biomarker or gene. This variable is used to quantify how much the expression level of a gene or biomarker changes over time relative to its baseline (initial) level, expressed as a percentage.",
+      "Source": "Harmonized",
+      "Example": "0.494",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_raw",
+      "Label": "Raw Count",
+      "Description": "This field in NanoString data represents the unprocessed counts of gene expression directly obtained from the nCounter system. These counts are the initial data before any normalization or background correction is applied.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable represents the raw, unnormalized count of reads, molecules, or other quantifiable entities in a sample as measured in a sequencing or other analytical assay.",
+      "Source": "Harmonized",
+      "Example": "0.455",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_raw_cfb",
+      "Label": "Raw Fold Change From Baseline (CfB)",
+      "Description": "This field in NanoString data represents the change from baseline for unprocessed counts of gene expression directly obtained from the nCounter system.  It quantifies the difference in raw counts between a subsequent time point or condition and the baseline (initial) measurement",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable represents the change from baseline in raw counts of a biomarker or gene expression level. It quantifies the difference in raw counts between a subsequent time point or condition and the baseline (initial) measurement",
+      "Source": "Harmonized",
+      "Example": "1.322",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_raw_cfbperc",
+      "Label": "Raw Fold Percentage Change From Baseline (CfB)",
+      "Description": "This field in NanoString data represents the percentage change from baseline for unprocessed counts of gene expression directly obtained from the nCounter system. It quantifies the difference in raw counts between a subsequent time point or condition and the baseline (initial) measurement, expressed as a percentage.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable represents the percentage change from baseline in raw counts of a biomarker or gene expression level. It quantifies the difference in raw counts between a subsequent time point or condition and the baseline (initial) measurement, expressed as a percentage.",
+      "Source": "Harmonized",
+      "Example": "0.5234",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "count_raw_fold",
+      "Label": "Raw Fold Change",
+      "Description": "This field in NanoString data represents the fold change from baseline for unprocessed counts of gene expression directly obtained from the nCounter system.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The variable represents the fold change in raw counts between two conditions or time points",
+      "Source": "Harmonized",
+      "Example": "2.445",
+      "Key": false,
+      "DataType": "double",
+      "DqChecks": []
+    }
+  ],
+  "GdlDomain": "bm_nanostring",
+  "GdlDomainFeatureFlag": "N/A",
+  "GdlDomainLabel": "Nanostring Biomarker Domain",
+  "GdlDomainDescription": "This Biomarker domain provides information about nanosting Gene expression levels for the given sample"
+}

@@ -1,0 +1,208 @@
+{
+  "GdlLayer": "Business Intelligence",
+  "GdlSolutions": [
+    "vSIM"
+  ],
+  "DqChecks": [],
+  "Fields": [
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "rowid",
+      "Label": "Row Identifier",
+      "Description": "This is a unique identifier for each record in the dataset, often represented as an integer.The rowid is crucial for database management, enabling easy reference and manipulation of data.",
+      "Comment": "Row Id in the Database table ",
+      "Example": 49147,
+      "DataType": "integer"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "COLLECTION_GROUP",
+      "Label": "Collection Group",
+      "Description": "This variable categorizes the samples into different groups based on the criteria in the study that effects sample collection requirements.  Any variable in the study such as protocol version, optional consents, treatment groups, or cohorts that effect the sample collections for a patient are matrixed to create distinct collection groups.",
+      "Comment": "Values can be like: 1, 2, 3, 4, 99, SF (Screen Fail), UNKNOWN. It is mapped from ENROLLED, PROTOCOL_VERSION, and whichever subject-group fields are relevant for sample collection.",
+      "Example": "1,2,3,99,SF",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": true,
+      "DqChecks": [],
+      "VariableName": "SUBJID",
+      "Label": "Subject Identifier",
+      "Description": "The Subject Identification Number (SUBJID) is a unique identifier assigned to each subject or participant in the study. It is essential for tracking individual subjects throughout the research process. This id is often assigned after a subject completes screening and is sometimes refered to as a Randomization Id.  The SUBJID ensures confidentiality and anonymity while allowing researchers to associate collected data with specific individuals.  The subject id commonly includes the Site Id of the doctors office that the subject was randomized at.",
+      "Comment": "This varies across sponsors/study, typically formatted as XXXX-YYYY with X representing SITEID and Y representing Subject Id or number. It is retained as formatted in source file. If not present in source file the populate it is marked as as UNKNOWN",
+      "Example": "0104-4219",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": true,
+      "DqChecks": [],
+      "VariableName": "SITEID",
+      "Label": "Site Identifier",
+      "Description": "The Site Identifier (SITEID) denotes the investigator site location where the sample was collected. This variable helps in identifying which doctor collected samples from a subject, facilitating collection location analysis and management. This can be crucial for understanding site-specific effects or variations.",
+      "Comment": "It is typically numeric, if not present in source file this can be substringed from SUBJID, if truly unavailable populate as UNKNOWN",
+      "Example": "104",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": true,
+      "DqChecks": [],
+      "VariableName": "SAMPTYPE",
+      "Label": "Sample Type",
+      "Description": "This variable specifies the type of biological sample being collected. Different sample types may require different collection methods, handling, and storage conditions. Understanding the sample type is vital for both the integrity of the data and the analysis conducted later.",
+      "Comment": "Mapped from ORIGINAL_SAMPLE_TYPE",
+      "Example": "ADA",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EXP_COLLTP",
+      "Label": "Collection Visit",
+      "Description": "The Expected Collection Time Point is the visit and timepoint information for the collection.  This variable helps to understand which visit samples were collected for a subject.",
+      "Comment": "",
+      "Example": "V3 PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EXP_NUNIT",
+      "Label": "Expected Units",
+      "Description": "This represents the Expected Number of Units (EXP_NUNIT) that should be collected for this sample type, at this visit, for this subject during the sampling process. This variable is collection group specific and helps to define the study expectations for sample collection given all variables for the subject.",
+      "Comment": "Expected Number of Units",
+      "Example": 1,
+      "DataType": "integer"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ACT_NUNIT",
+      "Label": "Actual Units",
+      "Description": "The Actual Number of Units (ACT_NUNIT) refers to the number of units that were actually collected. Comparing this with the expected number allows researchers to assess the efficiency and effectiveness of the collection process.",
+      "Comment": "Actual Number of Units",
+      "Example": 1,
+      "DataType": "integer"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "DIFF",
+      "Label": "Difference - Expected vs Actual number of units collected",
+      "Description": "This variable captures the difference between the expected and actual number of units collected. It is calculated by subtracting ACT_NUNIT from EXP_NUNIT. A positive difference indicates a shortfall, while a negative difference suggests an over-collection. Monitoring this difference is crucial for understanding collection issues and improving future sampling strategies.",
+      "Comment": "This is the difference bewteen Expected vs Actual number of units collected",
+      "Example": 0,
+      "DataType": "integer"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Yes",
+          "Description": "The EDC has a collection form defined for this sample type and visit and the doctor has confirmed that the sample type was collected.."
+        },
+        {
+          "EnumVal": "No",
+          "Description": "The EDC has a collection form defined for this sample type and visit and the doctor has confirmed that the sample type was NOT collected."
+        },
+        {
+          "EnumVal": "UNKNOWN",
+          "Description": "The EDC does not have a collection form defined for this sample type and visit therefore the doctor can not confirm if the sample type was collected."
+        }
+      ],
+      "VariableName": "EDC_COLLECTION_PERFORMED",
+      "Label": "EDC Collection Performed",
+      "Description": "This flag indicates whether the electronic data capture (EDC) for sample collection was successfully completed.",
+      "Comment": "This should be present in EDC Inventory output file and final MSI. Values are: Yes, No, UNKNOWN",
+      "Example": "Yes",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Unreconciled Sample(s)",
+          "Description": "Not aligned to a collection expectation, subject isn’t in a collection group, visit not mapped, sample type not mapped"
+        },
+        {
+          "EnumVal": "Out-of-Protocol",
+          "Description": "Collection group mapped for subject, visit mapped, and sample type mapped, however the sample type was not expected at the visit for the collection group"
+        },
+        {
+          "EnumVal": "Optional Collection",
+          "Description": "The collection was defined as an optional collection in the expected sample schedule and the sample was collected."
+        },
+        {
+          "EnumVal": "Over Collection",
+          "Description": "The sample type was expected to be collected for the collection group and visit, however, more than the expected maximum number of samples were collected. "
+        },
+        {
+          "EnumVal": "Full Collection",
+          "Description": "The sample type was expected to be collected for the collection group and visit and the expected number of samples were collected."
+        },
+        {
+          "EnumVal": "Partial Collection",
+          "Description": "The sample type was expected to be collected for the collection group and visit, however, less than the expected maximum number of samples were collected. "
+        },
+        {
+          "EnumVal": "Missed Collection - CRF marked collection as NOT DONE",
+          "Description": "The sample type was expected to be collected for the collection group and visit, however, the sample type was not collected and the doctor confirmed in the eCRF that this sample type was not collected at the visit."
+        },
+        {
+          "EnumVal": "Missed Collection - CRF unconfirmed",
+          "Description": "The sample type was expected to be collected for the collection group and visit, however, the sample type was not collected.  There is not an eCRF completed for this visit and sample type."
+        },
+        {
+          "EnumVal": "Missed Collection - CRF marked collection as DONE",
+          "Description": "The sample type was expected to be collected for the collection group and visit, however, the sample type was not collected and the doctor confirmed in the eCRF that this sample type was at the visit.  This should be investigated!"
+        }
+      ],
+      "VariableName": "SAMPLE_COLLECTION_STATUS",
+      "Label": "Collection Status",
+      "Description": "This variable provides an overview of the current status of the sample collection process for a given subject, visit, and sample type based on the collection group. Understanding the collection status is important for evaluating the progress and completeness of the study.",
+      "Comment": "Sample collection status refers to the current state or condition of samples that have been collected from subjects as part of the study protocol eg.Full collection",
+      "Example": "Full Collection",
+      "DataType": "Enum"
+    }
+  ],
+  "GdlDomain": "sim_avail_exp_vs_actual",
+  "GdlDomainFeatureFlag": "sample_collection",
+  "GdlDomainDescription": "This table holds the expected sample collection details as compared to the actual collections. It is used to identify missed samples, extra, partial, or successful collections of samples.",
+  "GdlDomainLabel": "Sample Collection Expected vs Actual"
+}

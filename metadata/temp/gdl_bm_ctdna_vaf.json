@@ -1,0 +1,91 @@
+{
+  "GdlLayer": "Business Intelligence",
+  "GdlSolutions": [
+    "eBDM"
+  ],
+  "DqChecks": [],
+  "Fields": [
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": true,
+      "DqChecks": [],
+      "VariableName": "sampleid",
+      "Label": "Sample Identifier",
+      "Description": "Sample identifier for circulating tumor DNA assay.",
+      "Comment": "Sample identifier for circulating tumor DNA assays.",
+      "Example": "XYZ112302233",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": true,
+      "DqChecks": [],
+      "VariableName": "param",
+      "Label": "Biomarker Name",
+      "Description": "param in bm_ctdna_vaf refers to the specific biomarkers being measured or analyzed. In this case, its gene name appended with the mutation as amino acid single letter code-position- replace amino acid code e.g. EGFR C799S.",
+      "Comment": "Param refers to the specific biomarkers being measured or analyzed.Biomarkers are biological molecules that signify a normal or abnormal process, or a condition or disease. They can be used to see how well the body responds to a treatment for a disease or condition.",
+      "Example": "EGFR C797S",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "vaf",
+      "Label": "Variant Allele Frequency",
+      "Description": "This column gives Variant Allele Frequency (VAF). Variant Allele Frequency (VAF) is a key metric in circulating tumor DNA (ctDNA) assays. It represents the proportion of DNA molecules carrying a specific variant compared to the total DNA molecules in a sample.",
+      "Comment": "Variant Allele Frequency, indicates the abundance of a particular variant allele in the sample",
+      "Example": "26.54",
+      "DataType": "double"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "vaf_cfb",
+      "Label": "Variant Allele Frequency - Change from Baseline (CfB)",
+      "Description": "This column gives change in the variant allele frequency from baseline for a particular mutation indicated by param. These values can be positive or negative.Positive values indicate an increase in variant allele frequency compared to baseline. Negative values indicate a decrease in variant allele frequency compared to baseline. A value of 0 indicates no change from baseline.",
+      "Comment": "Varient allele frequency change from baseline, indicates how the frequency of a specific genetic variant has changed relative to its baseline value",
+      "Example": "-11.66",
+      "DataType": "double"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "vaf_cfbperc",
+      "Label": "Variant Allele Frequency - Percentage Change from Baseline (CfB)",
+      "Description": "This column gives percentage change in the variant allele frequency from baseline for a particular mutation indicated by param. Variant Allele Frequency % Change From Baseline, provides a relative measure of how much the variant allele frequency has changed compared to its baseline value.",
+      "Comment": "Variant Allele Frequency % Change From Baseline, provides a relative measure of how much the variant allele frequency has changed compared to its baseline value.",
+      "Example": "-4.34",
+      "DataType": "double"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "mutation_status",
+      "Label": "Mutation Status",
+      "Description": "This column gives a mutation status for the sample from ctdna assays. Values indicating the detection status of a mutation: Detected indicates that the mutation is present in the sample. Not detected indicates that the mutation is absent in the sample.",
+      "Comment": "mutation status, indicates whether a specific genetic mutation is present in a sample and this mutations associated with treatment response or disease progression can lead to the discovery of new biomarkers for treatment prediction",
+      "Example": "DETECTED,NOT DETECTED",
+      "DataType": "string"
+    }
+  ],
+  "GdlDomain": "bm_ctdna_vaf",
+  "GdlDomainFeatureFlag": "N/A",
+  "GdlDomainLabel": "CTDNA VAF Biomarker Domain",
+  "GdlDomainDescription": "Circulating Tumor DNA Variant Allele Frequency (VAF) Biomarker Domain"
+}

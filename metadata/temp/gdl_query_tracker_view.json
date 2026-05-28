@@ -1,0 +1,395 @@
+{
+  "GdlLayer": "Business Intelligence",
+  "GdlSolutions": [
+    "vSIM"
+  ],
+  "DqChecks": [],
+  "Fields": [
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "uniqueid",
+      "Label": "uniqueIdentifier",
+      "Description": "The uniqueid variable serves as a primary key in the domain, ensuring that each record can be distinctly identified. This is crucial for tracking samples, discrepancies, and resolutions without confusion.It helps researchers and data managers reference specific records quickly, facilitating data management and audit processes.",
+      "Comment": "This is unique Id for the query",
+      "Example": "0f18fbaea08bb70d9201f08852940845",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "protocol_id",
+      "Label": "Protocol or Study Identifier",
+      "Description": "The protocol_id variable, also known as StudyId, is a unique identifier assigned to each clinical study, serving as a primary key for data management and reporting. It ensures accurate linkage of all study-related information and supports regulatory compliance.",
+      "Comment": "N/A",
+      "Example": "EYEWITNESS_219516",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "vendor",
+      "Label": "Vendor",
+      "Description": "The vendor variable identifies the Central laboratory or organization responsible for processing the sample or derivative such as an Assay or Testing Lab. Vendors can vary in their capabilities and compliance standards. Knowing the vendor allows for tracking performance, quality assurance, and adherence to standards. It can also help identify any potential issues related to sample or derivative handling or processing.",
+      "Comment": "Vendor Name",
+      "Example": "PPD",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "file_source",
+      "Label": "File Source",
+      "Description": "The file_source variable specifies the originating data system. Options include EDC, representing site-collected data, or Central Lab or Inventory or Special Lab vendors, signifying data from laboratory systems received via electronic file transfer.",
+      "Comment": "DATASOURCE should be populated with the name of the vendor to which sample was first received",
+      "Example": "EDC",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "subject_id",
+      "Label": "Subject Identifier",
+      "Description": "The subject_id variable, also know as subjid, uniquely identifies each study participant following screening, sometimes Randomization ID. This identifier is crucial for tracking individual subjects throughout the study while ensuring their confidentiality. It typically includes the SiteId of the randomization site.",
+      "Comment": "This varies across sponsors or study, typically formatted as XXXX-YYYY with X representing SITEID and Y representing Subject Id or number. It is retained as formatted in source file. If not present in source file the populate it is marked as as UNKNOWN",
+      "Example": "261784-000797",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "sample_id",
+      "Label": "Sample Identifier",
+      "Description": "The sample_id variable, also known as sampid, is an identifier for the biological sample collected from a subject, and it provides a unique reference for each biological sample, ensuring clear identification throughout the study. Supports traceability of samples, which is important for ensuring data integrity and compliance and enables the analysis of specific samples in relation to outcomes or other data collected in the study.",
+      "Comment": "Depending on inventory vendor and sample type, this could be the same ID as Accession ID or the same ID as Derivative ID, or unique to both. If not present in source file populate as UNKNOWN",
+      "Example": "2L638143072",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "sample_type",
+      "Label": "Sample Type",
+      "Description": "The sample_type variable, also known as samptype, is a general classification of the biological sample, and it helps in organizing data by sample type, facilitating analysis and reporting. Ensures that samples are categorized according to the study protocol and assists in maintaining quality control by allowing researchers to monitor different types of samples collected.",
+      "Comment": "type of sample collected from subject",
+      "Example": "Virology Plasma EDTA",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "visit",
+      "Label": "Visit",
+      "Description": "The visit variable indicates the specific visit or occasion during which the sample was collected. This is often numbered (for example Visit-1 V1, Visit-2 V2, Visit-3 V3, Visit-4 V4) to reflect the study timeline. Tracking visits is crucial for longitudinal studies, as it helps researchers analyze changes over time in the same subjects. It also allows for proper scheduling and resource allocation during the trial.",
+      "Comment": "Original Visit recorded in source inventory. QB does not alter this field. Often abbreviated visit nomenclature will be recorded here (e.g., SCR, BSL, C1D1, C5D1, EOT, PD, FU). Use this for deriving MAPPEDVISIT",
+      "Example": "UNS 2024-08-24",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "discrepancy_description",
+      "Label": "Discrepancy Description",
+      "Description": "The discrepancy_description variable is the description of category assigned to the given query record. It helps to the categorize the query like Invalid subject ID, Missing collection date, EDC entry missing etc.",
+      "Comment": "N/A",
+      "Example": "EDC entry missing",
+      "DataType": "Enum",
+      "EnumList": [
+        {
+          "EnumVal": "Assay Coll. Date / EDC Coll. Date Disc.",
+          "Description": "Indicates discrepancy related to Assay Collection Date and EDC Collection Date."
+        },
+        {
+          "EnumVal": "Coll. Date / EDC Coll. Date Disc.",
+          "Description": "Indicates discrepancy related to Central Lab Collection Date and EDC Collection Date."
+        },
+        {
+          "EnumVal": "Coll. Time / EDC Coll. Time Disc.",
+          "Description": "Indicates discrepancy related to Central Lab Collection Time and EDC Collection Time."
+        },
+        {
+          "EnumVal": "Collected per EDC, but missing in inventory",
+          "Description": "Indicates discrepancy where data is collected in EDC but missing in Central Lab or Lab Inventory."
+        },
+        {
+          "EnumVal": "Duplicate Derivative IDs",
+          "Description": "Indicates discrepancy related to duplicate derivative id."
+        },
+        {
+          "EnumVal": "EDC collection date/time missing",
+          "Description": "Indicates discrepancy where EDC Collection Date or Time is missing."
+        },
+        {
+          "EnumVal": "EDC entry missing",
+          "Description": "Indicates discrepancy where EDC Sample entry is missing."
+        },
+        {
+          "EnumVal": "Expected sample not collected",
+          "Description": "Indicates discrepancy where it shows expected sample is not collected."
+        },
+        {
+          "EnumVal": "Expected sample partially collected",
+          "Description": "Indicates discrepancy where it shows expected sample has been partially collected."
+        },
+        {
+          "EnumVal": "Invalid subject ID",
+          "Description": "Indicates discrepancy where it shows an invalid subject ID."
+        },
+        {
+          "EnumVal": "Missing collection date",
+          "Description": "Indicates discrepancy where Central Lab Collection Date is missing."
+        },
+        {
+          "EnumVal": "Non-applicable Visit",
+          "Description": "Indicates discrepancy where the visit in not applicable."
+        },
+        {
+          "EnumVal": "Subject ID and Screen ID not in EDC",
+          "Description": "Indicates discrepancy where it shows Subject Id and Screen ID are not in EDC."
+        },
+        {
+          "EnumVal": "Visit Schedule Discrepancy",
+          "Description": "Indicates discrepancy where is shows discrepancy in visit schedule."
+        }
+      ]
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "collection_date",
+      "Label": "Collection Date",
+      "Description": "The collection_date variable specifies the exact date when the sample was collected from the participant. Collection dates are critical for tracking the timeline of the study, analyzing results in relation to treatment phases, and ensuring that samples are processed within appropriate timeframes. They also help in longitudinal studies to correlate changes over time with specific interventions or treatments.It should contain single date.",
+      "Comment": "Date of sample collection from inventory data",
+      "Example": "202-08-24",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "date_reported",
+      "Label": "Date Reported",
+      "Description": "The date_reported variable is the date query was reported within the vSIM system, representing the timestamp when the data discrepancy was initially identified.",
+      "Comment": "Date when query was generated",
+      "Example": "2024-10-17",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "response",
+      "Label": "Response",
+      "Description": "The response variable is used to allow the user to take notes about the response or resolution after investigation or querying a vendor or site for resolution.",
+      "Comment": "Response added to the query",
+      "Example": "Sent an email to the investigator, awaiting data update in the EDC",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "requery",
+      "Label": "Requery",
+      "Description": "The requery variable is part of query tracking processs where after a clinical operations staff has queried a vendor or site about an issue, the requery field stores any comments regarding a follow up query sent to the site or vendor.",
+      "Comment": "This is like a follow up question based on previous query response.",
+      "Example": "Please confirm if the sample data file has been corrected to ensure date format is accurate for all rows.",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "requery_response",
+      "Label": "Requery Response",
+      "Description": "The requery_responce variable is intended to capture the outcome or feedback received from the requery process. It should provide insight into how the issues identified during the requery were resolved. Though not filled in your example, it plays a crucial role in tracking the resolution of discrepancies. Understanding the response to a requery can help identify recurring issues, inform future data collection practices, and ensure that data integrity is maintained.",
+      "Comment": "This is the response received on the requery",
+      "Example": "The assay data file has been regenerated with corrected date formats, please check.",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "resolution",
+      "Label": "Resolution",
+      "Description": "The resolution variable indicates the resolution notes about either the final root cause of the issue, or the data updates made to resolve the discrepancy.",
+      "Comment": "N/A",
+      "Example": "NA",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Yes",
+          "Description": "The issue has been resolved and closed."
+        }
+      ],
+      "VariableName": "resolved",
+      "Label": "Resolved",
+      "Description": "The resolved variable indicates the status of resolution of the discrepancy. A value of ‘Yes’ indicates that the issue has been resolved. The field is set to NULL when the issue has not been resolved and the query is open. A clear indication of whether a discrepancy is resolved helps teams prioritize their efforts. If marked as ‘Yes’, it signifies that the issue has been addressed and closed, if the field is set to NULL or is something other than 'Yes’, the query is considered open.",
+      "Example": "Yes",
+      "Comment": "N/A",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "date_resolved",
+      "Label": "Date Time Resolved",
+      "Description": "The date_resolved variable records the specific date on which the discrepancy was resolved.Tracking the date of resolution is important for documentation and auditing purposes. It helps in understanding the timeline of issues and resolutions, which can inform future data collection and management practices. It also provides context for stakeholders reviewing the data, particularly regarding timelines in the study.",
+      "Comment": "Date on which the query is resolved",
+      "Example": "2023-03-25",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "resolved_by",
+      "Label": "Resolved By",
+      "Description": "The resolved_by variable captures the name or identifier of the individual responsible for resolving the discrepancy. This value is left blank when the issue is automatically resolved by the system when a data issue resolution is detected by the data ingestion workflow.Knowing who resolved the issue is essential for accountability and traceability. It allows for clear communication if further questions arise about the resolution process and can help identify best practices for future discrepancies.",
+      "Comment": "Client user who has resolved the query",
+      "Example": "jsmith@mypharmacompany.com",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "date_time_reopened",
+      "Label": "Date Time Reopened",
+      "Description": "The date_time_reopened variable indicates the date and time when a previously resolved query was reopened for further investigation or action. If a query is reopened, it often means that new information has come to light or that the resolution was insufficient. Tracking this date and time helps in analyzing patterns related to discrepancies and can be critical for ongoing quality control.",
+      "Comment": "Date& Time when a closed query is reopened",
+      "Example": "2023-03-26",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "reopened_by",
+      "Label": "Reopened By",
+      "Description": "The reopened_by variable identifies the individual who initiated the reopening of the query. Understanding who reopened the query can provide context for the decision and help in communication regarding the issue. It allows for better tracking of accountability and can help identify trends or recurring issues.",
+      "Comment": "Client user who has reopened the query",
+      "Example": "jack.dawson@foundationmed.com",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "site_id",
+      "Label": "Site Identifier",
+      "Description": "The site_id variable serves as a unique identifier for the site where the sample was collected or processed. Each site in a clinical trial typically has its own identifier.Tracking data by site helps researchers manage and analyze data across multiple locations. It can reveal variations in data quality, processing, or patient outcomes based on site performance, and helps ensure that data integrity is maintained across the study.",
+      "Comment": "It is typically numeric, if not present in source file this can be substringed from SUBJID, if truly unavailable populate as UNKNOWN",
+      "Example": "1704",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "detail",
+      "Label": "Detail",
+      "Description": "The detail variable stores the contextual information necessary for investigating the reported discrepancy within Query Tracker. This includes specific details such as conflicting field values between data sources for a record, or date differences for column combinations, enabling users to understand the root cause of the query.",
+      "Comment": "N/A",
+      "Example": "SAMPTYPE=PK Backup; COLLECTION_DATE=2021-11-22; PK_STAB_EXPIRATION_DATE=2022-11-22",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "NA",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "New Query",
+          "Description": "This indicates that the query was created during the last data ingestion workflow run."
+        }
+      ],
+      "VariableName": "new_query",
+      "Label": "New Query",
+      "Description": "The new_query variable is calculated during the data ingestion workflow to indicate newly created queries.",
+      "Comment": "New query indicator",
+      "Example": "New Query",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "assay_inventory",
+      "Label": "Assay",
+      "Description": "assay_inventory indicates the assays (tests) available or applicable to the sample collected. It may include types of tests that can be performed, their status, or inventory levels. While this field is empty in some examples, it typically serves as a reference for researchers to know what tests are possible for the given sample. Understanding assay inventory is crucial for planning and executing analyses effectively, as it impacts the breadth of results that can be obtained from the sample.",
+      "Comment": "Assay Inventory details",
+      "Example": "Q2 Solutions",
+      "DataType": "string"
+    }
+  ],
+  "GdlDomain": "query_tracker_view",
+  "GdlDomainFeatureFlag": "N/A",
+  "GdlDomainLabel": "Query Tracker",
+  "GdlDomainDescription": "This domain holds the query information like open query or close query as part sample tracking or monitoring in the vSIM platform. It helps clinical teams to collaborate and identify sample discrepancies across data sources and clarify discrepant data observed in vSIM workflow"
+}

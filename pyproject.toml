@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lifescience-prompts"
+version = "0.1.0"
+description = "LLM-agnostic prompt factory for life science biomarker and SQL agents"
+readme = "README.md"
+license = {text = "Proprietary"}
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "mypy>=1.0", "ruff>=0.3"]
+
+[tool.setuptools.packages.find]
+include = ["lifescience_prompts*"]
+
+[tool.mypy]
+strict = true
+
+[tool.ruff]
+target-version = "py310"

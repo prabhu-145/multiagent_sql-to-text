@@ -1,0 +1,1243 @@
+{
+  "GdlLayer": "Business Intelligence",
+  "GdlSolutions": [
+    "vSIM"
+  ],
+  "DqChecks": [],
+  "Fields": [
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SPONSOR",
+      "Label": "Sponsor",
+      "Description": "The SPONSOR variable indicates the organization that funds, manages, or oversees the clinical study. It identifies the entity responsible for the conduct of the study, ensuring accountability in terms of compliance with regulations and ethical standards, and it is often the source of financial support, which can influence the design and execution of the study.",
+      "Comment": "The variable identifies the organization or individual responsible for initiating, managing, and financing a clinical trial or research study.",
+      "Example": "NurtureLife Inc.",
+      "DataType": "string"
+    },
+    {
+      "Level": "Platform",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "PROTOCOL",
+      "Label": "Prototcol Identifier",
+      "Description": "The PROTOCOL variable serves as an identifier for the study created and assign by the pharmaceutical client to uniquely identify the clinical trial.",
+      "Comment": "N/A",
+      "Example": "SB-CBA-123",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "DATA_SOURCE",
+      "Label": "Data Source",
+      "Description": "The data_source variable indicates the laboratory vendor location the sample is first received.  This would be the direct ship laboratory, most often the central lab for the study, but in some cases samples are shipped directly to the assay lab from the site.",
+      "Comment": "N/A",
+      "Example": "CENTRALLAB",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SITEID",
+      "Label": "Site Identifier",
+      "Description": "The SITEID variable is a unique identifier assigned to each study site participating in the clinical study and It helps in managing multiple sites within a study, allowing researchers to track enrollment, data collection, and site performance.Each site can generate its own data, and having a unique identifier helps ensure that data is accurately attributed to the correct site, minimizing errors.",
+      "Comment": "The variable uniquely identifies a specific study site within a clinical trial. Each site is a location where the study is conducted, such as a research institution.",
+      "Example": "0101",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SITE_NAME",
+      "Label": "Site Name",
+      "Description": "The SITE_NAME variable refers to the name of the clinical investigator site where the patient is participating in the study. It is frequently named with the Investigator Doctors name.  It allows for analysis of data by site, which can help in evaluating site performance and outcomes.",
+      "Comment": "N/A",
+      "Example": "Dr. Robert Poindexter",
+      "DataType": "string"
+    },
+    {
+      "Level": "Platform",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_SITENAME",
+      "Label": "EDC Site Name",
+      "Description": "The EDC_SITENAME variable represents the name of the site as recorded in the electronic data capture (EDC) system.Ensures that the name used in the EDC system is standardized, reducing the risk of confusion between different naming conventions and facilitating accurate data entry and retrieval in the EDC system, as names must match to link data correctly.  This name is most commonly the name of the Investigator Doctor. It helps in monitoring data entry and collection activities across sites by providing a clear identifier in the EDC system.",
+      "Comment": "N/A",
+      "Example": "Dr. Robert Poindexter",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_SITEID",
+      "Label": "EDC Site Identifier",
+      "Description": "The EDC_SITEID variable is a unique identifier assigned to the site within the EDC system.It ensures that each site has a distinct identifier, preventing any mix-ups in data attribution and analysis, and Facilitates efficient data management and tracking within the EDC system, making it easier to query and report data by site.It  enables researchers to perform site-level analyses, comparing outcomes and data quality across different locations.",
+      "Comment": "N/A",
+      "Example": 101,
+      "DataType": "integer"
+    },
+    {
+      "Level": "Platform",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "COUNTRY",
+      "Label": "Country",
+      "Description": "The country variable indicates the nation where the study site is located. It provides important context for the study, such as regional health regulations, cultural factors, and demographic characteristics and it allows for stratified analysis based on geographic location, which can be important for understanding variability in study outcomes.",
+      "Comment": "N/A",
+      "Example": "Argentina",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SUBJID",
+      "Label": "Subject Identifier (Inventory, Central Lab)",
+      "Description": "The SUBJID variable is a unique identifier assigned to each subject enrolled in the study.It allows researchers to track individual subjects throughout the study, including their enrollment and treatment, and ensures that data collected for each subject can be accurately linked to their specific case, maintaining the integrity of the dataset.While providing a unique identifier, SUBJID helps maintain subject confidentiality by not using personally identifiable information.",
+      "Comment": "N/A",
+      "Example": "0101-6288",
+      "DataType": "string"
+    },
+    {
+      "Level": "Platform",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_SUBJID",
+      "Label": "Subject Identifier (EDC)",
+      "Description": "The EDC_SUBJID variable is the identifier assigned to a subject within the electronic data capture (EDC) system.Facilitates the tracking of subjects throughout the study within the EDC system, allowing for seamless data entry and retrieval.Provides a consistent method for identifying subjects across different sites or studies and allows for anonymization of personal information while still providing a means to track and manage data.",
+      "Comment": "N/A",
+      "Example": "0101-6288",
+      "DataType": "string"
+    },
+    {
+      "Level": "Platform",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SCREENID",
+      "Label": "Screen Identifier",
+      "Description": "The SCREENID identifies a subject during the study screening process prior to randomization.",
+      "Comment": "N/A",
+      "Example": "10199901",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SCREENED_DATE",
+      "Label": "Screened Date",
+      "Description": "The SCREENED_DATE variable indicates the date when a subject was screened for eligibility in the study. It provides a timeline for the study, helping researchers track when subjects entered the screening phase. and facilitates analyses related to enrollment rates, timing of screening, and overall study timelines.",
+      "Comment": "Date the subject was initially screened to determine if they meet the criteria for study participation",
+      "Example": "2023-02-08",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Yes",
+          "Description": "Indicates the subject has passed screening and has been enrolled in the study."
+        },
+        {
+          "EnumVal": "No",
+          "Description": "Indicates that the subject has not passed screening and has not been enrolled in the study."
+        }
+      ],
+      "VariableName": "ENROLLED",
+      "Label": "Enrollment Status",
+      "Description": "The ENROLLED variable indicates whether the subject has been officially enrolled in the study, typically represented as “YES” or NO.”. It provides a clear indication of a subject’s status within the study, helping researchers manage participant flow and Ensures that only subjects who meet the criteria and have completed the necessary steps are counted as enrolled.",
+      "Comment": "Indicator of whether the subject has been officially enrolled in the study, which means they have met all eligibility criteria and have signed the informed consent",
+      "Example": "YES",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Male",
+          "Description": "Male, Man, Boy"
+        },
+        {
+          "EnumVal": "Female",
+          "Description": "Female, Woman, Girl"
+        },
+        {
+          "EnumVal": "UNKNOWN",
+          "Description": "Sex was not provided for the subject, or was not mappable during ingestion"
+        }
+      ],
+      "VariableName": "EDC_SEX",
+      "Label": "EDC Sex",
+      "Description": "The EDC_SEX variable records the sex of the subject as documented in the EDC system. It allows for the analysis of outcomes based on sex, which can be crucial for understanding treatment effects and side effects.and many regulatory agencies require sex data to ensure balanced representation in clinical trials.",
+      "Example": "male",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "PROTOCOL_VERSION",
+      "Label": "Prototcol Version",
+      "Description": "The PROTOCOL_VERSION variable denotes the specific version of the study protocol being followed. It helps track changes and updates to the study protocol, which is critical for maintaining data integrity. and ensures that all study activities are conducted according to the most current version of the protocol, as approved by regulatory bodies.Facilitates accurate documentation and reporting of protocol-related activities and outcomes.",
+      "Comment": "The version of the study protocol that the subject is following, which indicates any amendments or updates made to the original protocol.",
+      "Example": "SB-CBA-123-02",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "TREATMENT_GROUP",
+      "Label": "Treatment Group",
+      "Description": "The TREATMENT_GROUP variable indicates the group to which a subject is assigned for treatment purposes in the study. Helps in tracking randomized assignments, ensuring subjects receive the correct treatment as per the study design. It enables comparative analysis of outcomes between different treatment groups, which is essential for understanding treatment efficacy and vital for statistical analyses that assess the effect of treatments, stratifying results by group.",
+      "Comment": "The specific group or arm of the study to which the subject has been assigned, often indicating different treatment regimens or interventions.",
+      "Example": "Monotherapy",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "COLLECTION_GROUP",
+      "Label": "Collection Group",
+      "Description": "The COLLECTION_GROUP is a QuartzBio calculated field that combines the study specific variables that affect sample collection into distinct groups.  This value can then be used to ensure collections are compared against the right study sample collection expectations.",
+      "Example": 3,
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ENROLLED_DATE",
+      "Label": "Enrollment Date",
+      "Description": "The ENROLLED_DATE variable indicates the date on which a subject was officially enrolled in the clinical study. It Provides a timeline for when a subject joined the study, which is important for tracking participation. and Facilitates analysis of enrollment rates over time, which can help assess recruitment strategies.",
+      "Comment": "The date when the subject was officially enrolled in the study after meeting all eligibility criteria",
+      "Example": "2020-05-11",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ICF_DATE",
+      "Label": "Informed Consent Date",
+      "Description": "The ICF_DATE variable refers to the date when the Main informed consent form (ICF) was signed by the subject. Ensures that informed consent was obtained before any study-related activities, which is crucial for ethical research practices.it serves as a legal document indicating the subject’s agreement to participate in the study, important for regulatory purposes and Confirms that data collected from the subject is valid, as it was obtained after they understood the study details.",
+      "Comment": "The date when the subject signed the informed consent form, indicating their willingness to participate in the study.",
+      "Example": "2023-02-08",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Yes",
+          "Description": "The patient has given consent to participate in the study."
+        },
+        {
+          "EnumVal": "No",
+          "Description": "The patient has declined consent to participate in the study."
+        },
+        {
+          "EnumVal": "null",
+          "Description": "There is no available consent information for the patient."
+        }
+      ],
+      "VariableName": "SUBSTUDY_CONSENT_PK",
+      "Label": "Sub Study Consent PK",
+      "Description": "The SUBSTUDY_CONSENT_PK variable is an identifier for the consent obtained for any sub-studies associated with the main study.Ensures that specific consent for sub-studies is documented and linked to the primary study and facilitates data management and reporting for both the main study and any associated sub-studies. It necessary for compliance with ethical standards regarding informed consent for multiple components of research.",
+      "Comment": "Indicator of whether the subject has consented to participate in a pharmacokinetic (PK) substudy.",
+      "Example": "Yes, No",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SUBSTUDY_CONSENT_PK_DATE",
+      "Label": "Sub Study Consent PK Date",
+      "Description": "The SUBSTUDY_CONSENT_PK_DATE variable indicates the date when consent for the sub-study was obtained. It provides a clear timeline for when participants agreed to participate in sub-studies, important for record-keeping.It is necessary for regulatory submissions to demonstrate that consent was properly obtained.",
+      "Comment": "The date when the subject provided consent for the PK substudy.",
+      "Example": "2023-10-15",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Y",
+          "Description": "Y means Yes the subject has provided consent to allow Future Biologic Research"
+        },
+        {
+          "EnumVal": "N",
+          "Description": "N means No the subject has declined to allow Future Biologic Research"
+        },
+        {
+          "EnumVal": "null",
+          "Description": "There is not any information for the subject on their consent to Future Biologic Research"
+        }
+      ],
+      "VariableName": "OPTIONAL_CONSENT_FBR",
+      "Label": "Future Biologic Research (FBR) Consent",
+      "Description": "The OPTIONAL_CONSENT_FBR variable indicates whether consent for Future Biologic Research (FBR) has been obtained from the subject.It is necessary for compliance with ethical standards regarding follow-up research consent and provides clear documentation of participant preferences regarding future contact.",
+      "Comment": "Indicator of whether the subject has consented to future biomedical research (FBR) beyond the main study.",
+      "Example": "Y (Yes),N (No)",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "OPTIONAL_CONSENT_FBR_DATE",
+      "Label": "Future Biopsy Consent Date",
+      "Description": "The Future Biologic Research OPTIONAL_CONSENT_FBR_DATE variable indicates the date when consent for follow-up research was obtained.it Provides a record of when participants agreed to follow- up, which is important for planning future research activities and Serves as a legal record of participant consent for follow up, which is important for ethical and regulatory reasons.",
+      "Comment": "The date when the subject provided consent for future biomedical research.",
+      "Example": "2022-10-28",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "WITHDRAW_OPTIONAL_CONSENT_FBR_DATE",
+      "Label": "Future Biologic Research Consent Withdraw Date",
+      "Description": "The Future Biologic Research  WITHDRAW_OPTIONAL_CONSENT_FBR_DATE variable indicates the date when consent for follow-up research was withdrawn, if applicable. It provides a record of when a participant chose to withdraw their consent for follow-up, which is crucial for ethical compliance. and ensures that researchers respect participants decisions regarding their involvement in follow-up research.",
+      "Comment": "The date when the subject withdrew their consent for future biomedical research.",
+      "Example": "2022-10-28",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "TREATMENT_START_DATE",
+      "Label": "Treatment Start Date",
+      "Description": "The TREATMENT_START_DATE variable indicates the date when the subject began receiving treatment as part of the study. It provides a timeline for when treatment commenced, which is critical for monitoring treatment efficacy and adherence and facilitates analysis related to treatment duration and outcomes, helping to assess the impact of the intervention.",
+      "Comment": "The date when the subject began receiving the study treatment or intervention",
+      "Example": "2023-03-11",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "TREATMENT_END_DATE",
+      "Label": "Treatment End Date",
+      "Description": "The TREATMENT_END_DATE variable indicates the date when the subject’s treatment concluded. It provides a clear endpoint for treatment, which is important for evaluating outcomes and side effects. and facilitates the analysis of treatment duration and its impact on study results.",
+      "Comment": "The date when the subject completed or stopped the study treatment.",
+      "Example": "2024-11-23",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "STUDY_TERMINATION_DATE",
+      "Label": "Study Termination Date",
+      "Description": "The STUDY_TERMINATION_DATE variable indicates the date when the study was officially terminated. It provides a clear endpoint for the study, important for project management and reporting. and marks the completion of data collection, helping to define the dataset used for analysis.",
+      "Comment": "The date when the subject participation in the study was terminated, for any reason",
+      "Example": "2023-03-03",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "ON",
+          "Description": "The subject is current receiving treatment in the study."
+        },
+        {
+          "EnumVal": "OFF",
+          "Description": "The subject is either not yet receiving treatment, or has already completed treatment in the study."
+        }
+      ],
+      "VariableName": "ON_OFF_TREATMENT",
+      "Label": "On Off Treatment Status",
+      "Description": "The ON_OFF_TREATMENT variable indicates whether a subject is currently receiving treatment (ON), has completed treatment, or is not receiving treatment (OFF). It provides real-time information about the subjects treatment status, which is crucial for managing their care and monitoring outcomes and helps in ensuring that analyses consider only the relevant timeframes for treatment effects.",
+      "Comment": "Indicator of whether the subject is currently on treatment or off treatment at the time of data capture",
+      "Example": "ON, OFF",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ORIGINAL_VISIT",
+      "Label": "Original Visit",
+      "Description": "The ORIGINAL_VISIT variable is the value received from the Central Lab to identify the visit for the sample collection.  This is the value prior to going through any normalization by the data ingestion workflow.",
+      "Example": "V3",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_ORIGINAL_VISIT",
+      "Label": "EDC Original Visit",
+      "Description": "The EDC_ORIGINAL_VISIT variable is the value received from the EDC to identify the visit for the sample collection.  This is the value prior to going through any normalization by the data ingestion workflow.",
+      "Comment": "The original visit identifier as recorded in the EDC system.",
+      "Example": "Day 1 Randomization",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_MAPPED_VISIT",
+      "Label": "EDC Mapped Visit",
+      "Description": "The EDC_MAPPED_VISIT variable represents the value received from the EDC for the visit after it has been normalized in the data ingestion workflow to align to the study plan.",
+      "Example": "V3",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "MAPPED_VISIT",
+      "Label": "Mapped Visit",
+      "Description": "The MAPPED_VISIT variable represents the value received from the Central Lab for the visit after it has been normalized in the data ingestion workflow to align to the study plan.",
+      "Comment": "N/A",
+      "Example": "V3",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_ORIGINAL_TIMEPOINT",
+      "Label": "EDC Original Timepoint",
+      "Description": "The EDC_ORIGINAL_TIMEPOINT variable is the value received from the EDC to identify the time point within a visit for the sample collection.  This is the value prior to going through any normalization by the data ingestion workflow.",
+      "Comment": "The specific timepoint identifier as originally recorded in the electronic data capture (EDC) system, representing a point in the study timeline when data or samples are collected.",
+      "Example": "predose",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_MAPPED_TIMEPOINT",
+      "Label": "EDC Mapped Timepoint",
+      "Description": "The EDC_MAPPED_TIMEPOINT variable is the value received from the EDC to identify the time point within a visit for the sample collection.  This is the value after it has gone through normalization by the data ingestion workflow.",
+      "Comment": "The timepoint identifier in the EDC system that has been mapped to a standardized study timepoint, aligning with the protocol-defined schedule of events",
+      "Example": "PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "MAPPED_TIMEPOINT",
+      "Label": "Mapped Timepoint",
+      "Description": "The MAPPED_TIMEPOINT variable is the value received from the Central Lab to identify the time point within a visit for the sample collection.  This is the value after it has gone through normalization by the data ingestion workflow.",
+      "Comment": "The standardized timepoint identifier used in the study protocol, which may be derived from or mapped to the original timepoints recorded in the EDC system",
+      "Example": "PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_TPT",
+      "Label": "EDC TPT",
+      "Description": "The EDC_TPT variable is a combination of the EDC Mapped Visit and the EDC Mapped Time Point to create a normalized unique identifier for the Visit Time Point.  This value is what the vSIM system will use when reconciling the TPT and ASSAY_TPT values to ensure harmonized values across systems.",
+      "Example": "V3 PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "TPT",
+      "Label": "TPT",
+      "Description": "The TPT variable is a combination of the Mapped Visit and the Mapped Time Point to create a normalized unique identifier for the Visit Time Point.  This value is what the vSIM system will use when reconciling the EDC_TPT and ASSAY_TPT values to ensure harmonized values across systems.",
+      "Example": "V3 PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ORIGINAL_VISIT_DESCRIPTION",
+      "Label": "Original Visit Description",
+      "Description": "The ORIGINAL_VISIT_DESCRIPTION variable provides a detailed description of the original visit for the subject within the study.  This free text visit description is provided by the Central Lab to provide more information to identify the subject visit event that is codified in the Original_Visit field.",
+      "Example": "V3",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_FORM",
+      "Label": "EDC Form",
+      "Description": "The EDC_FORM variable is the normalized mapped value that identifies the EDC Collection Form if one is available for the visit and sample type of the collected sample.  This value is used to be able to join to the FORM variable which is mapped from Central Lab data so that the information in both systems can be reconciled. ",
+      "Example": "BIOMARKERS",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_FORM_GENERAL",
+      "Label": "EDC Form General",
+      "Description": "The EDC_FORM_GENERAL variable is the original form identifier for the EDC Collection Form if one is available for the visit and sample type.",
+      "Comment": "A general identifier for forms used in the EDC system, potentially encompassing a variety of data capture forms.",
+      "Example": "sci_1",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "FORM",
+      "Label": "Form",
+      "Description": "The FORM variable is the normalized mapped value for the EDC Collection Form used for the visit and sample type, if one is defined for this visit and sample type.  This value is mapped from the visit and sample type information in the Central Lab data and is used to join the collection information from the Central Lab back to the EDC Collection Form to ensure that the information is reconciled from both sources.",
+      "Comment": "N/A",
+      "Example": "BIOMARKERS",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ACCESSIONID",
+      "Label": "Accession Identifier",
+      "Description": "The ACCESSIONID variable is a unique identifier for the requisition.  It usually also identifies the kit used to collect samples for the visit timepoint and is useful to group samples that were collected from the same visit time point.  Many Central Labs will create their sample derivative ids by adding a unique tube extension identifier to the accession id.",
+      "Example": "LG709278F",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SAMPID",
+      "Label": "Sample Identifier",
+      "Description": "The SAMPID variable is an identifier for the biological sample collected from a subject, and it provides a unique reference for each biological sample, ensuring clear identification throughout the study. Supports traceability of samples, which is important for ensuring data integrity and compliance and enables the analysis of specific samples in relation to outcomes or other data collected in the study.",
+      "Comment": "A specific identifier for the sample collected from the subject, used to uniquely identify and track the sample within the study and laboratory systems.",
+      "Example": "LG709278F28",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "DERIVATIVEID",
+      "Label": "Derivative Identifier",
+      "Description": "The DERIVATIVEID variable is the unique identifier for all samples in the clinical trial.  For samples collected directly from the subject this value will match the SAMPID, for derivatives or aliquots of the original sample created through the preparation and testing processes at laboratory vendors and sites each aliquot will be assigned a unique DERIVATIVEID to track it through it's life in the study. ",
+      "Example": "LG709278F28",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ORIGINAL_SAMPLE_TYPE",
+      "Label": "Original Sample Type",
+      "Description": "The ORIGINAL_SAMPLE_TYPE variable is the original value received from the Central Lab that specifies the type of the original biological sample collected from the subject and it provides essential information for categorizing samples, which is crucial for analysis and interpretation and  facilitates analysis based on sample types, allowing researchers to assess variations in outcomes based on the type of sample collected.",
+      "Comment": "The type of the original sample collected from the subject, such as blood, urine, or tissue, as defined by the study protocol.",
+      "Example": "Whole Blood",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_SAMPLE_TYPE",
+      "Label": "EDC Sample Type",
+      "Description": "The EDC_SAMPLE_TYPE variable indicates the mapped and normalized sample type from the recorded value in the EDC system, and it helps standardize the classification of sample types across different sites and studies. It is important for regulatory documentation to confirm that sample types are recorded correctly and ensures that the sample types are consistently recorded within the EDC system, reducing errors.",
+      "Comment": "The sample type as recorded in the EDC system",
+      "Example": "serum",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SAMPTYPE",
+      "Label": "Sample Type",
+      "Description": "The SAMPTYPE variable is the normalized value mapped from the ORIGINAL_SAMPLE_TYPE received from the Central Lab that specifies the type of the biological sample contained within the sample. It provides essential information for categorizing samples, which is crucial for analysis and interpretation and  facilitates analysis based on sample types, allowing researchers to assess variations in outcomes based on the type of sample.",
+      "Comment": "The standardized sample type used in the study, which may be used for categorizing and managing different types of samples collected.",
+      "Example": "Plasma",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SAMPLE_NAME",
+      "Label": "Sample Name",
+      "Description": "The SAMPLE_NAME variable provides the name or description of the biological sample and can also contained intended use information. This information is usually received from the Central Lab.  Enhances the documentation of samples, providing context for analyses, and it facilitates easier communication among researchers regarding specific samples and assists in the retrieval of specific samples for further analysis or testing.",
+      "Comment": "The name or label given to the sample, which may include information about the subject, visit, and type of sample collected.",
+      "Example": "Tissue for Genetic Analysis",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Yes",
+          "Description": "There is an EDC Collection Form and the Doctor has confirmed that the sample was collected"
+        },
+        {
+          "EnumVal": "No",
+          "Description": "There is an EDC Collection Form and the Doctor has confirmed that the sample was NOT collected"
+        },
+        {
+          "EnumVal": "null",
+          "Description": "There is not EDC Collection information available in the EDC for this sample."
+        }
+      ],
+      "VariableName": "EDC_COLLECTION_PERFORMED",
+      "Label": "EDC Collection Performed",
+      "Description": "The EDC_COLLECTION_PERFORMED variable indicates the status of sample collection in the EDC system if an EDC Collection Form was used for the Visit and Sample Type and it provides information on whether the sample collection was performed, which is critical for data integrity. Ensures that all necessary sample collections are documented and monitored for compliance with the study protocol. Important for generating accurate reports on sample collection activities.",
+      "Comment": "Indicator of whether the sample collection was performed as recorded in the EDC system, confirming that the collection occurred as planned.",
+      "Example": "Yes, No",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_COLLECTION_DATE",
+      "Label": "EDC Collection Date",
+      "Description": "The EDC_COLLECTION_DATE variable is usually collected for visits and sample types that utilize an EDC Collection Form.  It specifies the date when the sample was collected as recorded in the EDC system and it helps ensure that sample collection aligns with the study protocol and is conducted at the appropriate time points. This value is reconciled by the vSIM data reconciliation activity with the COLLECTION_DATE field received from the Central Lab and the ASSAY_COLLECTION_DATE field received from the Assay Lab.",
+      "Comment": "The date of sample collection as recorded in the EDC system, which should match the actual collection date",
+      "Example": "2023-03-03",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "COLLECTION_DATE",
+      "Label": "Collection Date",
+      "Description": "The COLLECTION_DATE variable specifies the actual date on which a biological sample was collected from a subject as specified on the requisition and documented by the Central Lab. It provides an accurate record of when samples were taken, critical for maintaining the integrity of the study data. This value is reconciled by the vSIM data reconciliation activity with the EDC_COLLECTION_DATE field received from the EDC system and the ASSAY_COLLECTION_DATE field received from the Assay Lab.",
+      "Comment": "The actual date when the sample was collected from the subject as recorded on the requisition.",
+      "Example": "2023-03-03",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "EDC_COLLECTION_TIME",
+      "Label": "EDC Collection Time",
+      "Description": "The EDC_COLLECTION_TIME is only available when a Visit and Sample Type have an EDC Collection Form that requests the information from the Doctor.  The value records the time when the sample was collected in the EDC system. Adds specificity to sample collection records, allowing researchers to analyze data with precision concerning time. This value is reconciled by the vSIM data reconciliation activity with the COLLECTION_TIME field received from the Central Lab and the ASSAY_COLLECTION_TIME field received from the Assay Lab.",
+      "Comment": "The time of sample collection as recorded in the EDC system, which should match the actual collection time.",
+      "Example": "12:31:00",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "COLLECTION_TIME",
+      "Label": "Collection Time",
+      "Description": "The COLLECTION_TIME variable indicates the actual time at which the biological sample was collected, and it is essential for studies that require detailed timing of sample collection, such as pharmacokinetic studies and maintain the quality of collected data by ensuring accurate timestamps are recorded.  This value is collected on the requisition and sent to the Central Lab and should be available for all samples.  This value is reconciled by the vSIM data reconciliation activity with the EDC_COLLECTION_TIME field, when available from the EDC system, and the ASSAY_COLLECTION_TIME field received from the Assay Lab.",
+      "Comment": "The actual time when the sample was collected from the subject.",
+      "Example": "12:31:00",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "CENTRAL_LAB_RECEIVED_DATE",
+      "Label": "Central Lab Received Date",
+      "Description": "The CENTRAL_LAB_RECEIVED_DATE variable records the date when the sample was received by the central lab. It  provides a clear timeline of the sample’s journey from collection to laboratory receipt. Important for audits and compliance checks, ensuring that all sample handling processes are documented.",
+      "Comment": "The date when the central laboratory received the sample for processing and analysis.",
+      "Example": "2023-03-10",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "CENTRAL_LAB_RECEIVED_TIME",
+      "Label": "Central Lab Received Time",
+      "Description": "The CENTRAL_LAB_RECEIVED_TIME variable indicates the time at which the sample was received by the central laboratory. It allows for precise tracking of sample logistics and timing, which is critical for time-sensitive analyses. and helps validate the logistics of sample transportation and handling.",
+      "Comment": "The time when the central laboratory received the sample for processing and analysis.",
+      "Example": "13:56:00",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "CENTRAL_LAB_RECEIVED_STATE",
+      "Label": "Central Lab Received Status",
+      "Description": "The CENTRAL_LAB_RECEIVED_STATE variable describes the condition of the sample upon its receipt at the central lab and it helps document any issues related to sample handling, such as temperature excursions or contamination.",
+      "Comment": "The condition or state of the sample upon receipt by the central laboratory, indicating whether the sample was received in good condition, damaged, or compromised.",
+      "Example": "Frozen",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "COLLECTION_TUBE_EXPIRED",
+      "Label": "Collection Tube Expired",
+      "Description": "The COLLECTION_TUBE_EXPIRED variable indicates whether the collection tube used for the sample was expired when used for sample collection. Ensures that samples are collected using valid, non-expired materials, which is critical for maintaining sample integrity and reduces the risk of compromised samples due to expired collection materials.",
+      "Comment": "Indicator of whether the collection tube used for the sample was expired at the time of collection, which could impact sample integrity.",
+      "Example": "Yes",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [
+        {
+          "EnumVal": "Tested",
+          "Description": "This sample has undergone the required laboratory analysis or assay testing procedures as defined by the study protocol. The results of these tests should be available or are in the process of being finalized. No further planned lab processing is expected for this sample within the current testing phase. This could indicate that the sample (derivative) has been tested at the assay laboratory."
+        },
+        {
+          "EnumVal": "Shipped",
+          "Description": "This sample has been packaged and dispatched from its original collection site or central lab or a storage location to another designated location, typically an assay laboratory or another processing facility. This could indicate that the sample (derivative) has been shipped from the central lab to the assay lab."
+        },
+        {
+          "EnumVal": "In Storage",
+          "Description": "This sample is currently being held in a designated storage location under specific environmental conditions (e.g., temperature, humidity) as defined by the study protocol. It is awaiting further processing, testing, or long-term archiving. This could indicate that the sample (derivative) is in storage or stored in the designated storage facility."
+        },
+        {
+          "EnumVal": "Discarded",
+          "Description": "This sample has been permanently disposed of according to the study's sample destruction policy and relevant regulatory guidelines. It is no longer available for any further use or analysis. This could indicate that the sample (derivative) has been discarded."
+        },
+        {
+          "EnumVal": "Returned to Site",
+          "Description": "This sample has been sent back to the original clinical trial site from a laboratory or storage facility. This might occur for various reasons, such as protocol deviations, insufficient sample volume, or specific study requirements. This could indicate that the sample (derivative) has been shipped back to the clinical trial site."
+        },
+        {
+          "EnumVal": "Not Received",
+          "Description": "This sample has been expected at a designated location (e.g., central laboratory, processing facility) but has not yet been confirmed as received. This could indicate that the sample (derivative) was not received from the clinical trial site, a delay in shipping, loss during transit, or an issue at the receiving end."
+        }
+      ],
+      "VariableName": "ALIQUOT_STATUS",
+      "Label": "Aliquot Status",
+      "Description": "The ALIQUOT_STATUS variable indicates the current status of the sample (Derivative) through it collection, storage and testing. The Sample (Derivative) tracking status can be Tested (lab analysis or assay testing complete, results available or pending), Shipped (packaged and sent from from its original collection site or central lab to another location like an assay lab or speciality lab), In Storage or Stored (held in a designated location or lab inventory), Discarded (permanently disposed of), Returned to Site (sent back to the originating clinical trial site), or Not Received (expected but not yet confirmed at the destination like central lab).",
+      "Comment": "The current status of the aliquot, or portion of the original sample, indicating whether it is available or used",
+      "Example": "Tested",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      
+      "EnumList": [
+        {
+          "EnumVal": "Tested",
+          "Description": "The sample (derivative) has been tested by the Assay Lab."
+        },
+        {
+          "EnumVal": "Received, Not Tested",
+          "Description": "The sample (derivative) has been received by the Assay Lab, but has not yet been tested."
+        },
+        {
+          "EnumVal": "Shipped, Not Tested",
+          "Description": "The sample (derivative) has been shipped to the Assay Lab, it is still pending testing after receipt."
+        },
+        {
+          "EnumVal": "Not Tested",
+          "Description": "The sample (derivative) has not been tested by the Assay Lab."
+        },
+        {
+          "EnumVal": "Not Done",
+          "Description": "The sample (derivative) has been received at the Assay Lab; however, the test is yet to be performed."
+        },
+        {
+          "EnumVal": "Failed",
+          "Description": "The sample (derivative) test has been failed during the test done by the Assay Lab."
+        },
+        {
+          "EnumVal": "UNKNOWN",
+          "Description": "The sample test will be marked 'UNKNOWN' if it does not belong to any of the possible status types."
+        }
+      ],
+
+      "VariableName": "ALIQUOT_RESULT_STATUS",
+      "Label": "Aliquot Result Status",
+      "Description": "The ALIQUOT_RESULT_STATUS variable records the status sample as it relates to testing status.  This field is closely related to the ALIQUOT_STATUS, but provides more details regarding the testing and result status.",
+      "Comment": "The status of the test results from the aliquot, indicating whether the results are pending, completed, or invalid.",
+      "Example": "Tested",
+      "DataType": "Enum"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "EnumList": [],
+      "VariableName": "CENTRAL_LAB_SAMPLE_STATUS",
+      "Label": "Central Lab Sample Status",
+      "Description": "The CENTRAL_LAB_SAMPLE_STATUS variable indicates the status of the sample as reported by the central laboratory.  This value is not normalized, but is the values for status reported from the Central Lab.  It helps track the processing and analysis status of samples in the lab, providing updates to researchers. Important for managing workflows within the laboratory and ensuring timely analysis of samples.",
+      "Comment": "The overall status of the sample at the central laboratory, including whether it is being processed, analyzed, or stored.",
+      "Example": "In Storage",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "CURRENT_LOCATION",
+      "Label": "Current Location",
+      "Description": "The CURRENT_LOCATION variable indicates the vendor location of the sample. It is essential for managing the inventory of samples, ensuring that each sample can be located when needed.",
+      "Comment": "The current location of the sample within the study or laboratory infrastructure, indicating where the sample is being stored or processed.",
+      "Example": "Q2 Solutions Singapore",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SHIP_TO",
+      "Label": "Shipped To",
+      "Description": "The SHIP_TO variable specifies the destination vendor when a sample is shipped from the central lab to an assay lab or storage facility.  It essential for tracking the movement of samples from one location to another, which is important for chain-of-custody documentation.",
+      "Comment": "The destination to which the sample is being shipped, which could be a central lab, testing facility, or another study site",
+      "Example": "GENETICSLAB",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SHIP_DATE_TIME",
+      "Label": "Shipped Date Time",
+      "Description": "The SHIP_DATE_TIME variable records the date and time when the sample was shipped from the Central Lab to an Assay Lab or Storage Facility. It provides clear documentation of shipping activities, which is crucial for tracking and audit purposes. Facilitates coordination between shipping and receiving entities.",
+      "Comment": "The date and time when the sample was shipped from its original location to the designated destination",
+      "Example": "19:57:00",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SHIPPED_DATE",
+      "Label": "Shipped Date",
+      "Description": "The SHIP_DATE_TIME variable records the date when the sample was shipped from the Central Lab to an Assay Lab or Storage Facility. It provides clear documentation of shipping activities, which is crucial for tracking and audit purposes. Facilitates coordination between shipping and receiving entities.",
+      "Comment": "The actual date when the sample was shipped.",
+      "Example": "2023-03-05",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "PARENT_LOCATION",
+      "Label": "Parent Location",
+      "Description": "The PARENT_LOCATION variable specifies the storage location of the sample with the level of detail provided by the vendor.  This would normally contain information about the freezer, shelf, rack, box storage information of the sample location. Ensures that there is a clear record of where the sample is in storage, which is vital for chain-of-custody documentation",
+      "Comment": "The original location of the sample before it was shipped, indicating where the sample was initially collected or stored",
+      "Example": "VFZ70610V-SHELF_1",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "CENTRAL_LAB_QUERY_STATUS",
+      "Label": "Central Lab Query Status",
+      "Description": "The CENTRAL_LAB_QUERY_STATUS variable indicates the overall status of any pending queries related to the sample at the central laboratory and helps in tracking and managing any issues or queries that arise regarding the sample, ensuring timely resolution.  Facilitates communication between researchers and laboratory personnel regarding sample handling or analysis.",
+      "Comment": "The status of any queries raised by the central laboratory regarding the sample, such as issues with sample identification, condition, or data discrepancies.",
+      "Example": "COMPLETED",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "SAMPLE_COMMENT",
+      "Label": "Sample Comment",
+      "Description": "The SAMPLE_COMMENT variable allows for any comments from the central lab regarding the sample disposition.  These comments can include notes around receipt, storage, quality or discard.",
+      "Comment": "Any additional comments or notes related to the sample, which may include observations about the collection process, sample condition, or specific instructions for handling.",
+      "Example": "Sample discarded as per EQID5968",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_VENDOR",
+      "Label": "Assay Vendor Name",
+      "Description": "The ASSAY_VENDOR variable identifies the vendor, company, or laboratory conducting the assay testing on the sample. It helps in tracking which vendor conducted the analysis, ensuring accountability and quality control in assay results.Facilitates relationships with external vendors and helps track performance and reliability over time and important for regulatory and compliance purposes, documenting where assays are conducted.",
+      "Comment": "The vendor or laboratory responsible for performing the assay or analysis on the sampl",
+      "Example": "GENETICSLAB",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_SITEID",
+      "Label": "Assay Site Identifier",
+      "Description": "The ASSAY_SITEID variable is the site code that the assay laboratory has stored in their system as it relates to the sample.  Allows researchers to correlate assay results with other data points related to the site, such as country or region, and is used by the vSIM Data Reconciliation Activity to reconcile with the SiteId and EDC_SiteId data points. ",
+      "Comment": "The site identifier for the location where the assay is being performed, which may be different from the site where the sample was collected.",
+      "Example": "101",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_SUBJID",
+      "Label": "Assay Subject Identifier",
+      "Description": "The ASSAY_SUBJID variable represents the subject identifier for the specific assay being performed, it links assay results back to the individual subject, maintaining the integrity of the study’s data. Allows researchers to correlate assay results with other data points related to the subject, such as demographics or treatment outcomes, and is used by the vSIM Data Reconciliation to confirm alignment with SUBJID and EDC_SUBJID",
+      "Comment": "The subject identifier associated with the assay, linking the assay results to the specific subject from whom the sample was collected.",
+      "Example": "0101-6288",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_SAMPID",
+      "Label": "Assay Sample Identifier",
+      "Description": "The ASSAY_SAMPID variable represents the sample identifier for the sample collected from the patient. it links assay results back to the sample collected from the subject, maintaining the integrity of the study’s data. Allows researchers to correlate assay results with other aliquots derived from the same sample.",
+      "Comment": "The sample identifier for the assay, used to track the specific sample being analyzed.",
+      "Example": "LG709278F28",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_DERIVATIVEID",
+      "Label": "Assay Derivartive Identifier",
+      "Description": "The ASSAY_DERIVATIVEID variable indicates the identifier for the sample being analyzed or created at the assay lab.  It important to maintain this value even if the sample is relabeled by the laboratory.",
+      "Comment": "The identifier for any derivative products used in the assay, which may be derived from the original sample.",
+      "Example": "LG709278F28",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_ANALYSIS",
+      "Label": "Assay Analysis",
+      "Description": "The ASSAY_ANALYSIS variable provides a description of the analysis performed on the assay sample. The specific assays or tests conducted on the sample are important for transparency and reproducibility and offers context for interpreting assay results by specifying the techniques and methodologies used.",
+      "Comment": "The type of analysis performed in the assay, which could include biochemical, molecular, or other types of laboratory tests.",
+      "Example": "Genetics",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_TPT",
+      "Label": "Assay TPT",
+      "Description": "The ASSAY_TPT variable indicates the visit time point associated with the sample.  The vSIM Data Reconciliation Activity compares this value with TPT and EDC_TPT for data alignment across vendors for the sample.",
+      "Comment": "The timepoint identifier for the assay, indicating when the sample for the assay was collected within the study timeline.",
+      "Example": "V3 PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_COLLECTION_DATE",
+      "Label": "Assay Collection Date",
+      "Description": "The ASSAY_COLLECTION_DATE variable specifies the date when the sample for the assay was collected and is the value stored in the assay laboratory system.  The vSIM Data Reconciliation activity compares this value with COLLECTION_DATE and EDC_COLLECTION_DATE to ensure data alignment across vendors.",
+      "Comment": "The date when the sample for the assay was collected.",
+      "Example": "2023-03-11",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_COLLECTION_TIME",
+      "Label": "Assay Collection Time",
+      "Description": "The ASSAY_COLLECTION_TIME variable specifies the date when the sample for the assay was collected and is the value stored in the assay laboratory system. The vSIM Data Reconciliation activity compares this value with COLLECTION_TIME and EDC_COLLECTION_TIME to ensure data alignment across vendors.",
+      "Comment": "The time when the sample for the assay was collected.",
+      "Example": "12:00 PM",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_RECEIVED_DATE",
+      "Label": "Assay Received Date",
+      "Description": "The ASSAY_RECEIVED_DATE variable records the date on which the sample was received for analysis at the laboratory. it helps track the timeline of the sample’s journey from collection to analysis, ensuring all steps are documented. Important for regulatory purposes, as it provides evidence of timely processing and adherence to protocol timelines.",
+      "Comment": "The date when the sample was received for the assay by the laboratory performing the analysis.",
+      "Example": "2023-05-05",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_ANALYSIS_DATE",
+      "Label": "Assay Analysis Date",
+      "Description": "The ASSAY_ANALYSIS_DATE variable specifies the date on which the actual analysis of the assay sample was performed and it is essential for reporting timelines and understanding the flow of data within the study.Important for maintaining quality standards and ensuring that analyses are performed within protocol-specified timeframes.",
+      "Comment": "The date when the analysis was performed on the sample.",
+      "Example": "2023-05-05",
+      "DataType": "date"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_CATEGORY",
+      "Label": "Assay Category",
+      "Description": "The ASSAY_CATEGORY variable categorizes the assay under which it falls, such as biochemical, molecular, or immunological assays and it is helps in classifying assays for easier data management and reporting.Important for ensuring compliance with regulations that may vary by assay type",
+      "Comment": "The category of the assay, such as pharmacokinetics (PK), pharmacodynamics (PD), or other types of analyses.",
+      "Example": "Sequencing",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_STATUS",
+      "Label": "Assay Status",
+      "Description": "The ASSAY_STATUS variable indicates the current status of the assay (e.g., completed, pending) and it is helps manage and monitor the workflow of assays, ensuring that processes are on track. This status Provides clear documentation of the assay’s progress, which is important for both internal tracking and external reporting.",
+      "Comment": "The current status of the assay, indicating whether it is pending, in progress, completed, or invalid",
+      "Example": "in analytical run(s)",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_REASON_NOTDONE",
+      "Label": "Assay Reason Not Done",
+      "Description": "The ASSAY_REASON_NOTDONE variable provides an explanation for why an assay was not performed, if applicable and it helps to maintain the integrity of the dataset by documenting any issues that may affect results.Ensures transparency in data reporting by providing reasons for incomplete assays.",
+      "Comment": "The reason why the assay was not performed, if applicable, which could include sample issues, subject withdrawal, or other factors.",
+      "Example": "Unaccepted(Split in Run)",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_MAPPED_VISIT",
+      "Label": "Assay Mapped Visit",
+      "Description": "The ASSAY_MAPPED_VISIT variable indicates the normalized mapped value for the visit.  This value is mapped from the ASSAY_ORIGINAL_VISIT value received from the assay lab to the study standard visit values. Facilitates organization of data by linking assays to specific visits, which is crucial for multi-visit studies.",
+      "Comment": "The visit identifier for the assay, mapped to standardized study visits.",
+      "Example": "V3",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_MAPPED_TIMEPOINT",
+      "Label": "Assay Mapped Timepoint",
+      "Description": "The ASSAY_MAPPED_TIMEPOINT variable indicates the normalized mapped value for the time point.  This value is mapped from the ASSAY_ORIGINAL_TIMEPOINT value received from the assay lab to the study standard time point values. Essential for understanding how timing impacts assay results, particularly in longitudinal studies.",
+      "Comment": "The timepoint identifier for the assay, mapped to standardized study timepoints.",
+      "Example": "PRE",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_ORIGINAL_VISIT",
+      "Label": "Assay Original Visit",
+      "Description": "The ASSAY_ORIGINAL_VISIT variable records the visit as it was received from the assay laboratory.  This is the value that is used to created the normalized value for ASSAY_MAPPED_VISIT.",
+      "Comment": "The original visit identifier for the assay as recorded in the study protocol.",
+      "Example": "V3",
+      "DataType": "string"
+    },
+    {
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Source": "Harmonized",
+      "Key": false,
+      "DqChecks": [],
+      "VariableName": "ASSAY_ORIGINAL_TIMEPOINT",
+      "Label": "Assay Original Timepoint",
+      "Description": "The ASSAY_ORIGINAL_TIMEPOINT variable records the time point as it was received from the assay laboratory.  This is the value that is used to created the normalized value for ASSAY_MAPPED_TIMEPOINT.",
+      "Comment": "The original timepoint identifier for the assay as recorded in the study protocol.",
+      "Example": "PRE",
+      "DataType": "string"
+    }
+  ],
+  "GdlDomain": "sample_inventory",
+  "GdlDomainFeatureFlag": "N/A",
+  "GdlDomainLabel": "Sampl Inventory Domain",
+  "GdlDomainDescription": "This domain holds vSIM Sample Inventory information collected from EDC, CTMS, Central Lab, Assay Lab or Speciality Lab. It will contain subject demographic details, EDC sample collection information, Sample tracking, Tube details, Assay details and more"
+}

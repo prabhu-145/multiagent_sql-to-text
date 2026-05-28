@@ -1,0 +1,130 @@
+{
+  "GdlLayer": "Business Intelligence",
+  "GdlSolutions": [
+    "eBDM"
+  ],
+  "DqChecks": [],
+  "Fields": [
+    {
+      "VariableName": "sampleid",
+      "Label": "Sample Identifier",
+      "Description": "sampleid in bm_fc table uniquely identifies the samples used for flowcytometry assays for biomarker measurement.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The sampleid variable uniquely identifies each biological sample collected from subjects and ensures that each sample can be accurately tracked, stored, and analyzed",
+      "Source": "Harmonized",
+      "Example": "XYZ123123121",
+      "Key": true,
+      "DataType": "string",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "param",
+      "Label": "Biomarker Name",
+      "Description": "param column is bm_fc gives the population name. param ROOT indicates the total number of acquired enents while boundary indicates the number of events (cells) selected for analysis by eliminating debris or artefacts.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "Param refers to the specific biomarkers being measured or analyzed.Biomarkers are biological molecules that signify a normal or abnormal process, or a condition or disease. They can be used to see how well the body responds to a treatment for a disease or condition.",
+      "Source": "Harmonized",
+      "Example": "cd4/IFNg",
+      "Key": true,
+      "DataType": "string",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "tree_revision_id",
+      "Label": "Tree Revision Identifier",
+      "Description": "tree_revision_id in bm_fc table refers to unique identifier for diffrenet versions of hierarchical tree structures used for clustering, gating proceses used in flowcytometry data analysis . ",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "A unique identifier for a specific version of the gating hierarchy or analysis tree used in the sample and ensures that the data can be consistently attributed to the correct version of the analysis",
+      "Source": "Harmonized",
+      "Example": "3",
+      "Key": false,
+      "DataType": "integer",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "gate_full_path",
+      "Label": "Full Population Name",
+      "Description": "gate__full_path columnin bm_fc table refers to the gating strategy/selection strategy used to gate the cellular population. The flowcytomtery data nalysis involves various gating strategy to uniquely identify population of interest and the full path of gating provides traceability of cellular population. This information is useful for marking the coexistence of cell surface markers like CD4, CD8 and that of cytokines.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The complete hierarchical path that specifies the sequence of gates applied to identify a particular cell population within a sample. Gating in flow cytometry involves drawing regions on plots to isolate specific subsets of cells based on various parameters (e.g., fluorescence intensity, size, granularity).",
+      "Source": "Harmonized",
+      "Example": "/boundary/singlet/viable/nonDebris/lymph/cd3/cd4/IFNg",
+      "Key": false,
+      "DataType": "string",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "gate_path",
+      "Label": "Short Population Name",
+      "Description": "gate_path column in bm_fc table provides short description of gating path. In case of more than one possibilities, it provides additional hierarchy. Eg. CD4 population can have gate_path as CD4 but IL2 can be CD4/IL2 or CD8/IL2. The later here means subset of CD4 showing IL2 and subset of CD8 showing IL2.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The sequence of gates or steps applied to isolate a particular cell population from a sample. Unlike gate_full_path, which provides a detailed and potentially verbose description, gate_path typically offers a more concise representation of the gating hierarchy",
+      "Source": "Harmonized",
+      "Example": "cd4/IFNg",
+      "Key": false,
+      "DataType": "string",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "cell_prop",
+      "Label": "Computed Percent Parent",
+      "Description": "cell_prop column in bm_fc table indicates the proportion of selected (gated) cells (events)  in total cells (acquired events during flowcytometry measurement).",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The proportion or percentage of cells within a specific gate relative to a parent population or the total sample. It represents the fraction of cells that meet the criteria defined by the gating strategy at a particular step.",
+      "Source": "Harmonized",
+      "Example": "1",
+      "Key": false,
+      "DataType": "integer",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "cell_count",
+      "Label": "Computed Event Count",
+      "Description": "cell_count column in bm_fc table gives the number of cells present in a particular gate (selected population). ",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The actual number of cells counted within a specific gate or population in a flow cytometry experiment. It provides a quantitative measure of the size or abundance of a particular cell subset within a sample.",
+      "Source": "Harmonized",
+      "Example": "11576",
+      "Key": false,
+      "DataType": "integer",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "flowjo_cell_prop",
+      "Label": "FlowJo Percent Parent",
+      "Description": "flowjo_cell_prop column in bm_fc table refers to the  the proportion of selected (gated) cells (events)  in total cells in FlowJo analysis.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The cell proportion calculated by the FlowJo software in a flow cytometry analysis. Similar to the cell_prop variable, it indicates the proportion of cells within a specific gate relative to the total cell count or a parent population.",
+      "Source": "Harmonized",
+      "Example": "1",
+      "Key": false,
+      "DataType": "integer",
+      "DqChecks": []
+    },
+    {
+      "VariableName": "flowjo_cell_count",
+      "Label": "FlowJo Event Count",
+      "Description": "flowjo_cell_count column in bm_fc table refers to the cell count for a selected (gated) population in FlowJo software. FlowJo is most commonly used software for analysis/visualization of flowcytometry data.",
+      "Level": "Study",
+      "FeatureFlag": "N/A",
+      "Comment": "The cell count calculated by the FlowJo software in flow cytometry analysis. Similar to cell_count, it indicates the actual number of cells counted within a specific gate or population, as determined by FlowJo analysis algorithms.",
+      "Source": "Harmonized",
+      "Example": "160362",
+      "Key": false,
+      "DataType": "integer",
+      "DqChecks": []
+    }
+  ],
+  "GdlDomain": "bm_fc",
+  "GdlDomainFeatureFlag": "N/A",
+  "GdlDomainLabel": "Flow Cytometry Biomarker Domain",
+  "GdlDomainDescription": "This Biomarker domain contains Flow Cytometry information of the given sample"
+}
