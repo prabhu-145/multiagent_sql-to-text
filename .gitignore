@@ -47,3 +47,19 @@ data/raw/
 # Cache
 .cache/
 .pytest_cache/
+
+# React
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Ollama models (if stored locally)
+models/
+
+# PostgreSQL backups
+*.sql
+*.dump
+
+# Coverage
+.coverage
+htmlcov/
