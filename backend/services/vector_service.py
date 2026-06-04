@@ -19,6 +19,7 @@ def store_document(
 ):
     """
     Upsert prevents duplicate records for the same doc_id.
+    Metadata stores PubMed ID, title, chunk ID, and query ID.
     """
     collection.upsert(
         ids=[doc_id],
@@ -30,17 +31,29 @@ def store_document(
 
 def search_similar(
     query_embedding,
-    n_results: int = 3
+    n_results: int = 3,
+    where_filter: dict | None = None
 ):
-    return collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n_results,
-        include=[
+    """
+    Search similar documents.
+
+    where_filter example:
+    {"query_id": "abc123"}
+    """
+    query_args = {
+        "query_embeddings": [query_embedding],
+        "n_results": n_results,
+        "include": [
             "documents",
             "metadatas",
             "distances"
         ]
-    )
+    }
+
+    if where_filter:
+        query_args["where"] = where_filter
+
+    return collection.query(**query_args)
 
 
 def get_collection_count():

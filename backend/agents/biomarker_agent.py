@@ -1,12 +1,76 @@
 import os
+import hashlib
 
 from services.pubmed_service import (
     search_pubmed,
-    fetch_pubmed_abstracts
+    fetch_pubmed_abstracts,
 )
 from services.llm_service import generate_response
 from services.embedding_service import create_embedding
 from services.vector_service import store_document, search_similar
+
+
+def build_pubmed_search_query(user_query: str) -> str:
+    """
+    Dynamically rewrite the user's question into a concise PubMed search query.
+    This avoids biomarker-specific hardcoding.
+    """
+
+    prompt = f"""
+You are a biomedical literature search assistant.
+
+Convert the user question into a concise PubMed search query.
+
+Rules:
+- Return only the search query.
+- Do not explain.
+- Do not use markdown.
+- Keep it under 12 words.
+- Include biomedical terms likely to retrieve relevant PubMed abstracts.
+- Do not answer the question.
+
+User Question:
+{user_query}
+
+PubMed Search Query:
+"""
+
+    try:
+        response = generate_response(
+            prompt=prompt,
+            model=os.getenv("BIOMARKER_AGENT_MODEL", "qwen2.5:1.5b"),
+            num_ctx=512,
+            num_predict=40,
+            temperature=0.1,
+            timeout=60,
+        )
+
+        cleaned = response.strip()
+        cleaned = cleaned.replace('"', "")
+        cleaned = cleaned.replace("`", "")
+        cleaned = cleaned.split("\n")[0].strip()
+
+        if cleaned:
+            return cleaned
+
+        return user_query
+
+    except Exception:
+        return user_query
+
+
+def create_query_id(user_query: str, pubmed_query: str, pubmed_ids: list[str]) -> str:
+    raw_text = (
+        user_query.lower().strip()
+        + "_"
+        + pubmed_query.lower().strip()
+        + "_"
+        + "_".join(pubmed_ids)
+    )
+
+    return hashlib.md5(
+        raw_text.encode("utf-8")
+    ).hexdigest()
 
 
 def chunk_text(text: str, chunk_size: int = 600):
@@ -33,6 +97,7 @@ def build_rag_context(similar_docs):
         metadata = metadatas[index] if index < len(metadatas) else {}
         distance = distances[index] if index < len(distances) else None
 
+        query_id = metadata.get("query_id", "unknown")
         pubmed_id = metadata.get("pubmed_id", "unknown")
         title = metadata.get("title", "No title available")
         chunk_id = metadata.get("chunk_id", "unknown")
@@ -40,6 +105,7 @@ def build_rag_context(similar_docs):
         context_blocks.append(
             f"""
 Source {index + 1}
+Query ID: {query_id}
 PubMed ID: {pubmed_id}
 Title: {title}
 Chunk ID: {chunk_id}
@@ -51,10 +117,11 @@ Evidence:
         )
 
         sources.append({
+            "query_id": query_id,
             "pubmed_id": pubmed_id,
             "title": title,
             "chunk_id": chunk_id,
-            "distance": distance
+            "distance": distance,
         })
 
     return "\n\n".join(context_blocks), sources
@@ -62,9 +129,11 @@ Evidence:
 
 def handle_biomarker_query(user_query: str):
     try:
+        pubmed_query = build_pubmed_search_query(user_query)
+
         pubmed_ids = search_pubmed(
-            user_query,
-            max_results=2
+            pubmed_query,
+            max_results=2,
         )
 
         articles = fetch_pubmed_abstracts(pubmed_ids)
@@ -75,9 +144,16 @@ def handle_biomarker_query(user_query: str):
                 "mode": "source_aware_rag",
                 "status": "failed",
                 "message": "No PubMed abstracts were found for this query.",
+                "pubmed_query": pubmed_query,
                 "pubmed_ids": pubmed_ids,
-                "suggestion": "Try a more specific biomarker query such as HER2 breast cancer biomarker or EGFR mutation lung cancer."
+                "suggestion": "Try a more specific biomarker query such as HER2 breast cancer biomarker or EGFR mutation lung cancer.",
             }
+
+        query_id = create_query_id(
+            user_query=user_query,
+            pubmed_query=pubmed_query,
+            pubmed_ids=pubmed_ids,
+        )
 
         stored_chunks = 0
 
@@ -88,27 +164,30 @@ def handle_biomarker_query(user_query: str):
 
             chunks = chunk_text(
                 abstract,
-                chunk_size=600
+                chunk_size=600,
             )
 
             for chunk_id, chunk in enumerate(chunks):
                 embedding = create_embedding(chunk)
 
-                doc_id = f"pubmed_{pubmed_id}_chunk_{chunk_id}"
+                doc_id = f"{query_id}_pubmed_{pubmed_id}_chunk_{chunk_id}"
 
                 metadata = {
+                    "query_id": query_id,
+                    "pubmed_query": pubmed_query,
                     "pubmed_id": pubmed_id,
                     "title": title,
                     "chunk_id": chunk_id,
                     "source": "PubMed",
-                    "agent": "biomarker_agent"
+                    "agent": "biomarker_agent",
+                    "user_query": user_query,
                 }
 
                 store_document(
                     doc_id=doc_id,
                     text=chunk,
                     embedding=embedding,
-                    metadata=metadata
+                    metadata=metadata,
                 )
 
                 stored_chunks += 1
@@ -117,11 +196,14 @@ def handle_biomarker_query(user_query: str):
 
         similar_docs = search_similar(
             query_embedding,
-            n_results=2
+            n_results=2,
+            where_filter={
+                "query_id": query_id,
+            },
         )
 
         retrieved_context, sources = build_rag_context(
-            similar_docs
+            similar_docs,
         )
 
         prompt = f"""
@@ -139,6 +221,9 @@ Rules:
 User Question:
 {user_query}
 
+PubMed Search Query Used:
+{pubmed_query}
+
 Retrieved PubMed Evidence:
 {retrieved_context}
 
@@ -151,13 +236,15 @@ Answer:
             num_ctx=2048,
             num_predict=180,
             temperature=0.2,
-            timeout=180
+            timeout=180,
         )
 
         return {
             "agent": "biomarker_agent",
             "mode": "source_aware_rag",
             "status": "success",
+            "query_id": query_id,
+            "pubmed_query": pubmed_query,
             "pubmed_ids": pubmed_ids,
             "articles_found": len(articles),
             "chunks_stored": stored_chunks,
@@ -165,7 +252,7 @@ Answer:
                 similar_docs.get("documents", [[]])[0]
             ),
             "sources": sources,
-            "summary": summary
+            "summary": summary,
         }
 
     except Exception as error:
@@ -175,5 +262,5 @@ Answer:
             "status": "failed",
             "message": "Biomarker Agent failed during PubMed retrieval, embedding, vector search, or LLM summarization.",
             "error": str(error),
-            "suggestion": "Check PubMed SSL, HuggingFace embedding model, ChromaDB path, and Ollama model status."
+            "suggestion": "Check PubMed SSL, HuggingFace embedding model, ChromaDB path, and Ollama model status.",
         }

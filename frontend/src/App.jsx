@@ -1,8 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 import "./App.css";
 
-const API_URL = "http://127.0.0.1:8000/api/chat";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://16.54.41.169:8000/api/chat";
 // If accessing from your laptop browser, use:
 // const API_URL = "http://YOUR_EC2_PUBLIC_IP:8000/api/chat";
 
@@ -10,6 +20,15 @@ function App() {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState(() => {
+    const savedHistory = localStorage.getItem("queryHistory");
+
+    if (savedHistory) {
+      return JSON.parse(savedHistory);
+  }
+
+  return [];
+});
 
   const sendQuery = async (customQuery = null) => {
     const finalQuery = customQuery || query;
@@ -35,6 +54,7 @@ function App() {
       );
 
       setResponse(res.data);
+      saveToHistory(finalQuery, res.data.intent);
       setQuery(finalQuery);
     } catch (error) {
       console.error("Frontend API Error:", error);
@@ -145,6 +165,54 @@ function App() {
     );
   };
 
+  const renderStatisticalChart = (result) => {
+  if (!result.results || !Array.isArray(result.results) || result.results.length === 0) {
+    return null;
+  }
+
+  const data = result.results;
+
+  const firstRow = data[0];
+  const columns = Object.keys(firstRow);
+
+  const labelKey =
+    result.group_by ||
+    columns.find((col) => typeof firstRow[col] === "string") ||
+    columns[0];
+
+  const numericKeys = columns.filter(
+    (col) => typeof firstRow[col] === "number" && col !== labelKey
+  );
+
+  if (numericKeys.length === 0) {
+    return null;
+  }
+
+  const valueKey = numericKeys[0];
+
+  return (
+    <div className="section">
+      <h3>Chart</h3>
+
+      <div className="chart-box">
+        <ResponsiveContainer width="100%" height={320}>
+          <BarChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey={labelKey} />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey={valueKey} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      <p className="muted">
+        Showing <strong>{valueKey}</strong> grouped by <strong>{labelKey}</strong>.
+      </p>
+    </div>
+  );
+};
+
   const renderStatistical = (result) => {
     return (
       <div className="result-card">
@@ -217,6 +285,8 @@ function App() {
             <pre>{result.sql}</pre>
           </div>
         )}
+        
+        {renderStatisticalChart(result)}
 
         {result.results && (
           <div className="section">
@@ -237,11 +307,19 @@ function App() {
         </div>
 
         {result.summary && (
-          <div className="summary-box">
-            <h3>Summary</h3>
-            <p>{result.summary}</p>
-          </div>
-        )}
+  <div className="summary-box">
+    <div className="section-header">
+      <h3>Summary</h3>
+      <button
+        className="copy-btn"
+        onClick={() => copyToClipboard(result.summary)}
+      >
+        Copy Summary
+      </button>
+    </div>
+    <p>{result.summary}</p>
+  </div>
+)}
 
         <div className="stats-grid">
           {result.articles_found !== undefined && (
@@ -310,13 +388,20 @@ function App() {
           </div>
         )}
 
-        {result.generated_sql && (
-          <div className="section">
-            <h3>Generated SQL</h3>
-            <pre>{result.generated_sql}</pre>
-          </div>
-        )}
-
+       {result.generated_sql && (
+  <div className="section">
+    <div className="section-header">
+      <h3>Generated SQL</h3>
+      <button
+        className="copy-btn"
+        onClick={() => copyToClipboard(result.generated_sql)}
+      >
+        Copy SQL
+      </button>
+    </div>
+    <pre>{result.generated_sql}</pre>
+  </div>
+)}
         {result.results && (
           <div className="section">
             <h3>SQL Results</h3>
@@ -332,6 +417,38 @@ function App() {
       </div>
     );
   };
+
+  const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("Copied to clipboard");
+  } catch (error) {
+    console.error("Copy failed:", error);
+    alert("Failed to copy");
+  }
+};
+
+  const saveToHistory = (queryText, intentValue) => {
+  const historyItem = {
+    query: queryText,
+    intent: intentValue || "unknown",
+    timestamp: new Date().toLocaleString(),
+  };
+
+  const updatedHistory = [
+    historyItem,
+    ...history.filter((item) => item.query !== queryText),
+  ].slice(0, 10);
+
+  setHistory(updatedHistory);
+  localStorage.setItem("queryHistory", JSON.stringify(updatedHistory));
+};
+
+
+  const clearHistory = () => {
+  setHistory([]);
+  localStorage.removeItem("queryHistory");
+};
 
   const renderError = (result) => {
     return (
@@ -385,7 +502,12 @@ function App() {
     return (
       <div className="result-card">
         <h2>Raw Response</h2>
-        <pre>{JSON.stringify(response, null, 2)}</pre>
+        <button
+  className="copy-btn"
+  onClick={() => copyToClipboard(JSON.stringify(response, null, 2))}
+>
+  Copy JSON
+</button>
       </div>
     );
   };
@@ -414,24 +536,49 @@ function App() {
             {loading ? "Processing..." : "Send"}
           </button>
         </div>
+<div className="examples">
+  <button onClick={() => sendQuery("what is search in genomics")}>
+    Query Guard
+  </button>
 
-        <div className="examples">
-          <button onClick={() => sendQuery("what is search in genomics")}>
-            Query Guard
-          </button>
+  <button onClick={() => sendQuery("average os by treatment group")}>
+    Statistics
+  </button>
 
-          <button onClick={() => sendQuery("average os by treatment group")}>
-            Statistics
-          </button>
+  <button onClick={() => sendQuery("What is HER2?")}>
+    Biomarker
+  </button>
 
-          <button onClick={() => sendQuery("What is HER2?")}>
-            Biomarker
-          </button>
+  <button onClick={() => sendQuery("show ctdna records")}>
+    SQL Query
+  </button>
+</div>
 
-          <button onClick={() => sendQuery("show ctdna records")}>
-            SQL Query
-          </button>
-        </div>
+{history.length > 0 && (
+  <div className="history-card">
+    <div className="section-header">
+      <h3>Query History</h3>
+      <button className="copy-btn" onClick={clearHistory}>
+        Clear History
+      </button>
+    </div>
+
+    <div className="history-list">
+      {history.map((item, index) => (
+        <button
+          key={index}
+          className="history-item"
+          onClick={() => sendQuery(item.query)}
+        >
+          <span className="history-query">{item.query}</span>
+          <span className="history-meta">
+            {item.intent} · {item.timestamp}
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+)}
 
         {loading && (
           <div className="loading-box">
