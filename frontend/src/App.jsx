@@ -13,22 +13,52 @@ import "./App.css";
 
 const API_URL =
   import.meta.env.VITE_API_URL || "http://16.54.41.169:8000/api/chat";
-// If accessing from your laptop browser, use:
-// const API_URL = "http://YOUR_EC2_PUBLIC_IP:8000/api/chat";
 
 function App() {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const [history, setHistory] = useState(() => {
     const savedHistory = localStorage.getItem("queryHistory");
 
     if (savedHistory) {
       return JSON.parse(savedHistory);
-  }
+    }
 
-  return [];
-});
+    return [];
+  });
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Copied to clipboard");
+    } catch (error) {
+      console.error("Copy failed:", error);
+      alert("Failed to copy");
+    }
+  };
+
+  const saveToHistory = (queryText, intentValue) => {
+    const historyItem = {
+      query: queryText,
+      intent: intentValue || "unknown",
+      timestamp: new Date().toLocaleString(),
+    };
+
+    const updatedHistory = [
+      historyItem,
+      ...history.filter((item) => item.query !== queryText),
+    ].slice(0, 10);
+
+    setHistory(updatedHistory);
+    localStorage.setItem("queryHistory", JSON.stringify(updatedHistory));
+  };
+
+  const clearHistory = () => {
+    setHistory([]);
+    localStorage.removeItem("queryHistory");
+  };
 
   const sendQuery = async (customQuery = null) => {
     const finalQuery = customQuery || query;
@@ -166,52 +196,56 @@ function App() {
   };
 
   const renderStatisticalChart = (result) => {
-  if (!result.results || !Array.isArray(result.results) || result.results.length === 0) {
-    return null;
-  }
+    if (
+      !result.results ||
+      !Array.isArray(result.results) ||
+      result.results.length === 0
+    ) {
+      return null;
+    }
 
-  const data = result.results;
+    const data = result.results;
+    const firstRow = data[0];
+    const columns = Object.keys(firstRow);
 
-  const firstRow = data[0];
-  const columns = Object.keys(firstRow);
+    const labelKey =
+      result.group_by ||
+      columns.find((col) => typeof firstRow[col] === "string") ||
+      columns[0];
 
-  const labelKey =
-    result.group_by ||
-    columns.find((col) => typeof firstRow[col] === "string") ||
-    columns[0];
+    const numericKeys = columns.filter(
+      (col) => typeof firstRow[col] === "number" && col !== labelKey
+    );
 
-  const numericKeys = columns.filter(
-    (col) => typeof firstRow[col] === "number" && col !== labelKey
-  );
+    if (numericKeys.length === 0) {
+      return null;
+    }
 
-  if (numericKeys.length === 0) {
-    return null;
-  }
+    const valueKey = numericKeys[0];
 
-  const valueKey = numericKeys[0];
+    return (
+      <div className="section">
+        <h3>Chart</h3>
 
-  return (
-    <div className="section">
-      <h3>Chart</h3>
+        <div className="chart-box">
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey={labelKey} />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey={valueKey} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
 
-      <div className="chart-box">
-        <ResponsiveContainer width="100%" height={320}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={labelKey} />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey={valueKey} />
-          </BarChart>
-        </ResponsiveContainer>
+        <p className="muted">
+          Showing <strong>{valueKey}</strong> grouped by{" "}
+          <strong>{labelKey}</strong>.
+        </p>
       </div>
-
-      <p className="muted">
-        Showing <strong>{valueKey}</strong> grouped by <strong>{labelKey}</strong>.
-      </p>
-    </div>
-  );
-};
+    );
+  };
 
   const renderStatistical = (result) => {
     return (
@@ -281,11 +315,19 @@ function App() {
 
         {result.sql && (
           <div className="section">
-            <h3>SQL Used</h3>
+            <div className="section-header">
+              <h3>SQL Used</h3>
+              <button
+                className="copy-btn"
+                onClick={() => copyToClipboard(result.sql)}
+              >
+                Copy SQL
+              </button>
+            </div>
             <pre>{result.sql}</pre>
           </div>
         )}
-        
+
         {renderStatisticalChart(result)}
 
         {result.results && (
@@ -307,19 +349,19 @@ function App() {
         </div>
 
         {result.summary && (
-  <div className="summary-box">
-    <div className="section-header">
-      <h3>Summary</h3>
-      <button
-        className="copy-btn"
-        onClick={() => copyToClipboard(result.summary)}
-      >
-        Copy Summary
-      </button>
-    </div>
-    <p>{result.summary}</p>
-  </div>
-)}
+          <div className="summary-box">
+            <div className="section-header">
+              <h3>Summary</h3>
+              <button
+                className="copy-btn"
+                onClick={() => copyToClipboard(result.summary)}
+              >
+                Copy Summary
+              </button>
+            </div>
+            <p>{result.summary}</p>
+          </div>
+        )}
 
         <div className="stats-grid">
           {result.articles_found !== undefined && (
@@ -343,6 +385,20 @@ function App() {
             </div>
           )}
         </div>
+
+        {result.query_id && (
+          <div className="section">
+            <h3>Query ID</h3>
+            <span className="pill">{result.query_id}</span>
+          </div>
+        )}
+
+        {result.pubmed_query && (
+          <div className="section">
+            <h3>PubMed Search Query</h3>
+            <p>{result.pubmed_query}</p>
+          </div>
+        )}
 
         {result.pubmed_ids && (
           <div className="section">
@@ -388,20 +444,21 @@ function App() {
           </div>
         )}
 
-       {result.generated_sql && (
-  <div className="section">
-    <div className="section-header">
-      <h3>Generated SQL</h3>
-      <button
-        className="copy-btn"
-        onClick={() => copyToClipboard(result.generated_sql)}
-      >
-        Copy SQL
-      </button>
-    </div>
-    <pre>{result.generated_sql}</pre>
-  </div>
-)}
+        {result.generated_sql && (
+          <div className="section">
+            <div className="section-header">
+              <h3>Generated SQL</h3>
+              <button
+                className="copy-btn"
+                onClick={() => copyToClipboard(result.generated_sql)}
+              >
+                Copy SQL
+              </button>
+            </div>
+            <pre>{result.generated_sql}</pre>
+          </div>
+        )}
+
         {result.results && (
           <div className="section">
             <h3>SQL Results</h3>
@@ -417,38 +474,6 @@ function App() {
       </div>
     );
   };
-
-  const copyToClipboard = async (text) => {
-  try {
-    await navigator.clipboard.writeText(text);
-    alert("Copied to clipboard");
-  } catch (error) {
-    console.error("Copy failed:", error);
-    alert("Failed to copy");
-  }
-};
-
-  const saveToHistory = (queryText, intentValue) => {
-  const historyItem = {
-    query: queryText,
-    intent: intentValue || "unknown",
-    timestamp: new Date().toLocaleString(),
-  };
-
-  const updatedHistory = [
-    historyItem,
-    ...history.filter((item) => item.query !== queryText),
-  ].slice(0, 10);
-
-  setHistory(updatedHistory);
-  localStorage.setItem("queryHistory", JSON.stringify(updatedHistory));
-};
-
-
-  const clearHistory = () => {
-  setHistory([]);
-  localStorage.removeItem("queryHistory");
-};
 
   const renderError = (result) => {
     return (
@@ -468,6 +493,38 @@ function App() {
             <strong>Suggestion:</strong> {result.suggestion}
           </p>
         )}
+      </div>
+    );
+  };
+
+  const renderRouteTrace = () => {
+    const trace = response?.result?.route_trace;
+
+    if (!trace || !Array.isArray(trace) || trace.length === 0) {
+      return null;
+    }
+
+    return (
+      <div className="trace-card">
+        <div className="section-header">
+          <h3>LangGraph Workflow Trace</h3>
+
+          <button
+            className="copy-btn"
+            onClick={() => copyToClipboard(trace.join(" → "))}
+          >
+            Copy Trace
+          </button>
+        </div>
+
+        <div className="trace-flow">
+          {trace.map((node, index) => (
+            <div key={index} className="trace-step">
+              <span className="trace-index">{index + 1}</span>
+              <span className="trace-node">{node}</span>
+            </div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -502,12 +559,7 @@ function App() {
     return (
       <div className="result-card">
         <h2>Raw Response</h2>
-        <button
-  className="copy-btn"
-  onClick={() => copyToClipboard(JSON.stringify(response, null, 2))}
->
-  Copy JSON
-</button>
+        <pre>{JSON.stringify(response, null, 2)}</pre>
       </div>
     );
   };
@@ -518,7 +570,8 @@ function App() {
         <header className="header">
           <h1>Life Sciences Multi-Agent AI Assistant</h1>
           <p>
-            Query Guard · Biomarker RAG · Statistical Analysis · Text-to-SQL
+            Query Guard · Biomarker RAG · Statistical Analysis · Text-to-SQL ·
+            LangGraph Workflow
           </p>
         </header>
 
@@ -535,62 +588,79 @@ function App() {
           <button onClick={() => sendQuery()} disabled={loading}>
             {loading ? "Processing..." : "Send"}
           </button>
+
+          <button
+            className="secondary-btn"
+            onClick={() => copyToClipboard(query)}
+            disabled={!query.trim()}
+          >
+            Copy Query
+          </button>
         </div>
-<div className="examples">
-  <button onClick={() => sendQuery("what is search in genomics")}>
-    Query Guard
-  </button>
 
-  <button onClick={() => sendQuery("average os by treatment group")}>
-    Statistics
-  </button>
+        <div className="examples">
+          <button onClick={() => sendQuery("what is search in genomics")}>
+            Query Guard
+          </button>
 
-  <button onClick={() => sendQuery("What is HER2?")}>
-    Biomarker
-  </button>
+          <button onClick={() => sendQuery("average os by treatment group")}>
+            Statistics
+          </button>
 
-  <button onClick={() => sendQuery("show ctdna records")}>
-    SQL Query
-  </button>
-</div>
+          <button onClick={() => sendQuery("What is HER2?")}>
+            Biomarker
+          </button>
 
-{history.length > 0 && (
-  <div className="history-card">
-    <div className="section-header">
-      <h3>Query History</h3>
-      <button className="copy-btn" onClick={clearHistory}>
-        Clear History
-      </button>
-    </div>
+          <button onClick={() => sendQuery("show ctdna records")}>
+            SQL Query
+          </button>
+        </div>
 
-    <div className="history-list">
-      {history.map((item, index) => (
-        <button
-          key={index}
-          className="history-item"
-          onClick={() => sendQuery(item.query)}
-        >
-          <span className="history-query">{item.query}</span>
-          <span className="history-meta">
-            {item.intent} · {item.timestamp}
-          </span>
-        </button>
-      ))}
-    </div>
-  </div>
-)}
+        {history.length > 0 && (
+          <div className="history-card">
+            <div className="section-header">
+              <h3>Query History</h3>
+              <button className="copy-btn" onClick={clearHistory}>
+                Clear History
+              </button>
+            </div>
+
+            <div className="history-list">
+              {history.map((item, index) => (
+                <button
+                  key={index}
+                  className="history-item"
+                  onClick={() => sendQuery(item.query)}
+                >
+                  <span className="history-query">{item.query}</span>
+                  <span className="history-meta">
+                    {item.intent} · {item.timestamp}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {loading && (
-          <div className="loading-box">
-            Processing request... Please wait.
-          </div>
+          <div className="loading-box">Processing request... Please wait.</div>
         )}
 
         {renderResponse()}
 
+        {renderRouteTrace()}
+
         {response && (
           <details className="raw-json">
             <summary>View Raw JSON</summary>
+
+            <button
+              className="copy-btn raw-copy-btn"
+              onClick={() => copyToClipboard(JSON.stringify(response, null, 2))}
+            >
+              Copy JSON
+            </button>
+
             <pre>{JSON.stringify(response, null, 2)}</pre>
           </details>
         )}
